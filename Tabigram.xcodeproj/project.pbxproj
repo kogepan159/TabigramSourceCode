@@ -8,22 +8,106 @@
 
 /* Begin PBXBuildFile section */
 		EF80757925CBBFCA00BDA7E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */; };
-		EF80757B25CBBFCA00BDA7E9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757A25CBBFCA00BDA7E9 /* SceneDelegate.swift */; };
 		EF80757D25CBBFCA00BDA7E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */; };
 		EF80758025CBBFCA00BDA7E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF80757E25CBBFCA00BDA7E9 /* Main.storyboard */; };
 		EF80758225CBBFCD00BDA7E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF80758125CBBFCD00BDA7E9 /* Assets.xcassets */; };
 		EF80758525CBBFCD00BDA7E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF80758325CBBFCD00BDA7E9 /* LaunchScreen.storyboard */; };
+		EF8075B125CBC06B00BDA7E9 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80758F25CBC06B00BDA7E9 /* search@2x.png */; };
+		EF8075B225CBC06B00BDA7E9 /* editProfileImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759025CBC06B00BDA7E9 /* editProfileImage@2x.png */; };
+		EF8075B325CBC06B00BDA7E9 /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759125CBC06B00BDA7E9 /* profile@2x.png */; };
+		EF8075B425CBC06B00BDA7E9 /* tabigram001.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EF80759325CBC06B00BDA7E9 /* tabigram001.jpeg */; };
+		EF8075B525CBC06B00BDA7E9 /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759425CBC06B00BDA7E9 /* save@2x.png */; };
+		EF8075B625CBC06B00BDA7E9 /* profile_placeholder.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */; };
+		EF8075B725CBC06B00BDA7E9 /* TanukiMagic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759725CBC06B00BDA7E9 /* TanukiMagic.ttf */; };
+		EF8075B825CBC06B00BDA7E9 /* sarial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759825CBC06B00BDA7E9 /* sarial.ttf */; };
+		EF8075B925CBC06B00BDA7E9 /* Billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759925CBC06B00BDA7E9 /* Billabong.ttf */; };
+		EF8075BA25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759A25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf */; };
+		EF8075BB25CBC06B00BDA7E9 /* iTunesArtwork@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759C25CBC06B00BDA7E9 /* iTunesArtwork@1x.png */; };
+		EF8075BC25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759E25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png */; };
+		EF8075BD25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759F25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png */; };
+		EF8075BE25CBC06B00BDA7E9 /* Icon-App-40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A025CBC06B00BDA7E9 /* Icon-App-40x40@1x.png */; };
+		EF8075BF25CBC06B00BDA7E9 /* Icon-App-20x20@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A125CBC06B00BDA7E9 /* Icon-App-20x20@1x.png */; };
+		EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */; };
+		EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */; };
+		EF8075C225CBC06B00BDA7E9 /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */; };
+		EF8075C325CBC06B00BDA7E9 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A525CBC06B00BDA7E9 /* Contents.json */; };
+		EF8075C425CBC06B00BDA7E9 /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */; };
+		EF8075C525CBC06B00BDA7E9 /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */; };
+		EF8075C625CBC06B00BDA7E9 /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */; };
+		EF8075C725CBC06B00BDA7E9 /* Icon-App-60x60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A925CBC06B00BDA7E9 /* Icon-App-60x60@3x.png */; };
+		EF8075C825CBC06B00BDA7E9 /* Icon-App-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AA25CBC06B00BDA7E9 /* Icon-App-60x60@2x.png */; };
+		EF8075C925CBC06B00BDA7E9 /* Icon-App-76x76@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AB25CBC06B00BDA7E9 /* Icon-App-76x76@1x.png */; };
+		EF8075CA25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AC25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png */; };
+		EF8075CB25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AD25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png */; };
+		EF8075CC25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AE25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg */; };
+		EF8075CD25CBC06B00BDA7E9 /* iTunesArtwork@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075AF25CBC06B00BDA7E9 /* iTunesArtwork@3x.png */; };
+		EF8075CE25CBC06B00BDA7E9 /* worldMap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EF8075B025CBC06B00BDA7E9 /* worldMap.jpg */; };
+		EF8075D825CBC0C000BDA7E9 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075D725CBC0C000BDA7E9 /* SignInViewController.swift */; };
+		EF8075DB25CBC10700BDA7E9 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075DA25CBC10700BDA7E9 /* SignUpViewController.swift */; };
+		EF8075DE25CBC1A100BDA7E9 /* certificateViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075DD25CBC1A100BDA7E9 /* certificateViewController1.swift */; };
+		EF8075E125CBC1C900BDA7E9 /* certificateViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075E025CBC1C900BDA7E9 /* certificateViewController2.swift */; };
+		EF8075E425CBC22500BDA7E9 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8075E325CBC22500BDA7E9 /* SignIn.storyboard */; };
+		EF8075EA25CBC27900BDA7E9 /* PlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075E925CBC27900BDA7E9 /* PlaceHolderTextView.swift */; };
+		EF8075EE25CBC2AC00BDA7E9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075ED25CBC2AC00BDA7E9 /* CustomButton.swift */; };
+		EF8075F125CBC2CE00BDA7E9 /* UIColor+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075F025CBC2CE00BDA7E9 /* UIColor+Extention.swift */; };
+		EF8075F425CBC30700BDA7E9 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075F325CBC30700BDA7E9 /* Pin.swift */; };
+		EF8075F725CBC31F00BDA7E9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075F625CBC31F00BDA7E9 /* User.swift */; };
+		EF8075FA25CBC35A00BDA7E9 /* FrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075F925CBC35A00BDA7E9 /* FrontViewController.swift */; };
+		EF8075FD25CBC3A800BDA7E9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */; };
+		EF80760125CBC3C600BDA7E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EF80757525CBBFCA00BDA7E9 /* Tabigram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tabigram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EF80757A25CBBFCA00BDA7E9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EF80757F25CBBFCA00BDA7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF80758125CBBFCD00BDA7E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF80758425CBBFCD00BDA7E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF80758625CBBFCD00BDA7E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF80758F25CBC06B00BDA7E9 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
+		EF80759025CBC06B00BDA7E9 /* editProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editProfileImage@2x.png"; sourceTree = "<group>"; };
+		EF80759125CBC06B00BDA7E9 /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
+		EF80759325CBC06B00BDA7E9 /* tabigram001.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tabigram001.jpeg; sourceTree = "<group>"; };
+		EF80759425CBC06B00BDA7E9 /* save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save@2x.png"; sourceTree = "<group>"; };
+		EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profile_placeholder.jpeg; sourceTree = "<group>"; };
+		EF80759725CBC06B00BDA7E9 /* TanukiMagic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TanukiMagic.ttf; sourceTree = "<group>"; };
+		EF80759825CBC06B00BDA7E9 /* sarial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sarial.ttf; sourceTree = "<group>"; };
+		EF80759925CBC06B00BDA7E9 /* Billabong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Billabong.ttf; sourceTree = "<group>"; };
+		EF80759A25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atletico-RegularDemo.otf"; sourceTree = "<group>"; };
+		EF80759C25CBC06B00BDA7E9 /* iTunesArtwork@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@1x.png"; sourceTree = "<group>"; };
+		EF80759E25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@2x.png"; sourceTree = "<group>"; };
+		EF80759F25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@1x.png"; sourceTree = "<group>"; };
+		EF8075A025CBC06B00BDA7E9 /* Icon-App-40x40@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@1x.png"; sourceTree = "<group>"; };
+		EF8075A125CBC06B00BDA7E9 /* Icon-App-20x20@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@1x.png"; sourceTree = "<group>"; };
+		EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-83.5x83.5@2x.png"; sourceTree = "<group>"; };
+		EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@3x.png"; sourceTree = "<group>"; };
+		EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ItunesArtwork@2x.png"; sourceTree = "<group>"; };
+		EF8075A525CBC06B00BDA7E9 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
+		EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@2x.png"; sourceTree = "<group>"; };
+		EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@3x.png"; sourceTree = "<group>"; };
+		EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@2x.png"; sourceTree = "<group>"; };
+		EF8075A925CBC06B00BDA7E9 /* Icon-App-60x60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-60x60@3x.png"; sourceTree = "<group>"; };
+		EF8075AA25CBC06B00BDA7E9 /* Icon-App-60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-60x60@2x.png"; sourceTree = "<group>"; };
+		EF8075AB25CBC06B00BDA7E9 /* Icon-App-76x76@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-76x76@1x.png"; sourceTree = "<group>"; };
+		EF8075AC25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@3x.png"; sourceTree = "<group>"; };
+		EF8075AD25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@2x.png"; sourceTree = "<group>"; };
+		EF8075AE25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "iTunesArtwork@2x.jpg"; sourceTree = "<group>"; };
+		EF8075AF25CBC06B00BDA7E9 /* iTunesArtwork@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@3x.png"; sourceTree = "<group>"; };
+		EF8075B025CBC06B00BDA7E9 /* worldMap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = worldMap.jpg; sourceTree = "<group>"; };
+		EF8075D725CBC0C000BDA7E9 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		EF8075DA25CBC10700BDA7E9 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		EF8075DD25CBC1A100BDA7E9 /* certificateViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = certificateViewController1.swift; sourceTree = "<group>"; };
+		EF8075E025CBC1C900BDA7E9 /* certificateViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = certificateViewController2.swift; sourceTree = "<group>"; };
+		EF8075E325CBC22500BDA7E9 /* SignIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		EF8075E925CBC27900BDA7E9 /* PlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderTextView.swift; sourceTree = "<group>"; };
+		EF8075ED25CBC2AC00BDA7E9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		EF8075F025CBC2CE00BDA7E9 /* UIColor+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extention.swift"; sourceTree = "<group>"; };
+		EF8075F325CBC30700BDA7E9 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		EF8075F625CBC31F00BDA7E9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		EF8075F925CBC35A00BDA7E9 /* FrontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontViewController.swift; sourceTree = "<group>"; };
+		EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +141,136 @@
 			isa = PBXGroup;
 			children = (
 				EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */,
-				EF80757A25CBBFCA00BDA7E9 /* SceneDelegate.swift */,
-				EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */,
+				EF8075D125CBC09300BDA7E9 /* SignIn */,
+				EF8075D025CBC07700BDA7E9 /* Main */,
+				EF80758E25CBC06B00BDA7E9 /* Resources */,
 				EF80757E25CBBFCA00BDA7E9 /* Main.storyboard */,
-				EF80758125CBBFCD00BDA7E9 /* Assets.xcassets */,
 				EF80758325CBBFCD00BDA7E9 /* LaunchScreen.storyboard */,
+				EF80758125CBBFCD00BDA7E9 /* Assets.xcassets */,
 				EF80758625CBBFCD00BDA7E9 /* Info.plist */,
 			);
 			path = Tabigram;
+			sourceTree = "<group>";
+		};
+		EF80758E25CBC06B00BDA7E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EF80758F25CBC06B00BDA7E9 /* search@2x.png */,
+				EF80759025CBC06B00BDA7E9 /* editProfileImage@2x.png */,
+				EF80759125CBC06B00BDA7E9 /* profile@2x.png */,
+				EF80759425CBC06B00BDA7E9 /* save@2x.png */,
+				EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */,
+				EF8075B025CBC06B00BDA7E9 /* worldMap.jpg */,
+				EF80759225CBC06B00BDA7E9 /* Images */,
+				EF80759625CBC06B00BDA7E9 /* Font */,
+				EF80759B25CBC06B00BDA7E9 /* Icon */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EF80759225CBC06B00BDA7E9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EF80759325CBC06B00BDA7E9 /* tabigram001.jpeg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		EF80759625CBC06B00BDA7E9 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				EF80759725CBC06B00BDA7E9 /* TanukiMagic.ttf */,
+				EF80759825CBC06B00BDA7E9 /* sarial.ttf */,
+				EF80759925CBC06B00BDA7E9 /* Billabong.ttf */,
+				EF80759A25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		EF80759B25CBC06B00BDA7E9 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				EF80759C25CBC06B00BDA7E9 /* iTunesArtwork@1x.png */,
+				EF80759D25CBC06B00BDA7E9 /* AppIcon.appiconset */,
+				EF8075AE25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg */,
+				EF8075AF25CBC06B00BDA7E9 /* iTunesArtwork@3x.png */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
+		EF80759D25CBC06B00BDA7E9 /* AppIcon.appiconset */ = {
+			isa = PBXGroup;
+			children = (
+				EF80759E25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png */,
+				EF80759F25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png */,
+				EF8075A025CBC06B00BDA7E9 /* Icon-App-40x40@1x.png */,
+				EF8075A125CBC06B00BDA7E9 /* Icon-App-20x20@1x.png */,
+				EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */,
+				EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */,
+				EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */,
+				EF8075A525CBC06B00BDA7E9 /* Contents.json */,
+				EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */,
+				EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */,
+				EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */,
+				EF8075A925CBC06B00BDA7E9 /* Icon-App-60x60@3x.png */,
+				EF8075AA25CBC06B00BDA7E9 /* Icon-App-60x60@2x.png */,
+				EF8075AB25CBC06B00BDA7E9 /* Icon-App-76x76@1x.png */,
+				EF8075AC25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png */,
+				EF8075AD25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png */,
+			);
+			path = AppIcon.appiconset;
+			sourceTree = "<group>";
+		};
+		EF8075D025CBC07700BDA7E9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EF8075E625CBC24900BDA7E9 /* Models */,
+				EF8075E725CBC24E00BDA7E9 /* Views */,
+				EF8075E825CBC25400BDA7E9 /* Controllers */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		EF8075D125CBC09300BDA7E9 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				EF8075E325CBC22500BDA7E9 /* SignIn.storyboard */,
+				EF8075D725CBC0C000BDA7E9 /* SignInViewController.swift */,
+				EF8075DA25CBC10700BDA7E9 /* SignUpViewController.swift */,
+				EF8075DD25CBC1A100BDA7E9 /* certificateViewController1.swift */,
+				EF8075E025CBC1C900BDA7E9 /* certificateViewController2.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		EF8075E625CBC24900BDA7E9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF8075E925CBC27900BDA7E9 /* PlaceHolderTextView.swift */,
+				EF8075ED25CBC2AC00BDA7E9 /* CustomButton.swift */,
+				EF8075F025CBC2CE00BDA7E9 /* UIColor+Extention.swift */,
+				EF8075F325CBC30700BDA7E9 /* Pin.swift */,
+				EF8075F625CBC31F00BDA7E9 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF8075E725CBC24E00BDA7E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EF8075E825CBC25400BDA7E9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF8075F925CBC35A00BDA7E9 /* FrontViewController.swift */,
+				EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */,
+				EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */,
+				EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,9 +330,40 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF8075B125CBC06B00BDA7E9 /* search@2x.png in Resources */,
 				EF80758525CBBFCD00BDA7E9 /* LaunchScreen.storyboard in Resources */,
+				EF8075BC25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png in Resources */,
+				EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */,
+				EF8075E425CBC22500BDA7E9 /* SignIn.storyboard in Resources */,
+				EF8075BD25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png in Resources */,
+				EF8075CA25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png in Resources */,
+				EF8075C625CBC06B00BDA7E9 /* Icon-App-40x40@2x.png in Resources */,
+				EF8075C525CBC06B00BDA7E9 /* Icon-App-29x29@3x.png in Resources */,
+				EF8075C225CBC06B00BDA7E9 /* ItunesArtwork@2x.png in Resources */,
+				EF8075CC25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg in Resources */,
+				EF8075B725CBC06B00BDA7E9 /* TanukiMagic.ttf in Resources */,
+				EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */,
+				EF8075BF25CBC06B00BDA7E9 /* Icon-App-20x20@1x.png in Resources */,
+				EF8075C325CBC06B00BDA7E9 /* Contents.json in Resources */,
+				EF8075BE25CBC06B00BDA7E9 /* Icon-App-40x40@1x.png in Resources */,
+				EF8075B925CBC06B00BDA7E9 /* Billabong.ttf in Resources */,
+				EF8075CE25CBC06B00BDA7E9 /* worldMap.jpg in Resources */,
+				EF8075B325CBC06B00BDA7E9 /* profile@2x.png in Resources */,
+				EF8075BA25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf in Resources */,
 				EF80758225CBBFCD00BDA7E9 /* Assets.xcassets in Resources */,
 				EF80758025CBBFCA00BDA7E9 /* Main.storyboard in Resources */,
+				EF8075CD25CBC06B00BDA7E9 /* iTunesArtwork@3x.png in Resources */,
+				EF8075C825CBC06B00BDA7E9 /* Icon-App-60x60@2x.png in Resources */,
+				EF8075CB25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png in Resources */,
+				EF8075B425CBC06B00BDA7E9 /* tabigram001.jpeg in Resources */,
+				EF8075C725CBC06B00BDA7E9 /* Icon-App-60x60@3x.png in Resources */,
+				EF8075C425CBC06B00BDA7E9 /* Icon-App-20x20@2x.png in Resources */,
+				EF8075B625CBC06B00BDA7E9 /* profile_placeholder.jpeg in Resources */,
+				EF8075C925CBC06B00BDA7E9 /* Icon-App-76x76@1x.png in Resources */,
+				EF8075BB25CBC06B00BDA7E9 /* iTunesArtwork@1x.png in Resources */,
+				EF8075B225CBC06B00BDA7E9 /* editProfileImage@2x.png in Resources */,
+				EF8075B525CBC06B00BDA7E9 /* save@2x.png in Resources */,
+				EF8075B825CBC06B00BDA7E9 /* sarial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +374,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF8075FA25CBC35A00BDA7E9 /* FrontViewController.swift in Sources */,
 				EF80757D25CBBFCA00BDA7E9 /* ViewController.swift in Sources */,
+				EF8075DE25CBC1A100BDA7E9 /* certificateViewController1.swift in Sources */,
+				EF8075E125CBC1C900BDA7E9 /* certificateViewController2.swift in Sources */,
+				EF8075F125CBC2CE00BDA7E9 /* UIColor+Extention.swift in Sources */,
 				EF80757925CBBFCA00BDA7E9 /* AppDelegate.swift in Sources */,
-				EF80757B25CBBFCA00BDA7E9 /* SceneDelegate.swift in Sources */,
+				EF80760125CBC3C600BDA7E9 /* EditProfileViewController.swift in Sources */,
+				EF8075F425CBC30700BDA7E9 /* Pin.swift in Sources */,
+				EF8075EE25CBC2AC00BDA7E9 /* CustomButton.swift in Sources */,
+				EF8075EA25CBC27900BDA7E9 /* PlaceHolderTextView.swift in Sources */,
+				EF8075DB25CBC10700BDA7E9 /* SignUpViewController.swift in Sources */,
+				EF8075FD25CBC3A800BDA7E9 /* ProfileViewController.swift in Sources */,
+				EF8075D825CBC0C000BDA7E9 /* SignInViewController.swift in Sources */,
+				EF8075F725CBC31F00BDA7E9 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
