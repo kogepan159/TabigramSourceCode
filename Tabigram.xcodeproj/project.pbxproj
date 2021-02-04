@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A145F9E90334677229121B3 /* Pods_Tabigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A9E62363CE7C3ABCBB8F7B /* Pods_Tabigram.framework */; };
 		EF80757925CBBFCA00BDA7E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */; };
 		EF80757D25CBBFCA00BDA7E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */; };
 		EF80758025CBBFCA00BDA7E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF80757E25CBBFCA00BDA7E9 /* Main.storyboard */; };
@@ -58,6 +59,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46A9E62363CE7C3ABCBB8F7B /* Pods_Tabigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tabigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AE50ABE6965CC4DFEAA4C68 /* Pods-Tabigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tabigram.debug.xcconfig"; path = "Target Support Files/Pods-Tabigram/Pods-Tabigram.debug.xcconfig"; sourceTree = "<group>"; };
+		B1F169B3FDB53AA3FAB8BBFF /* Pods-Tabigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tabigram.release.xcconfig"; path = "Target Support Files/Pods-Tabigram/Pods-Tabigram.release.xcconfig"; sourceTree = "<group>"; };
 		EF80757525CBBFCA00BDA7E9 /* Tabigram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tabigram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -115,17 +119,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A145F9E90334677229121B3 /* Pods_Tabigram.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85A997A97F44BCE8EF623EDB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AE50ABE6965CC4DFEAA4C68 /* Pods-Tabigram.debug.xcconfig */,
+				B1F169B3FDB53AA3FAB8BBFF /* Pods-Tabigram.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B74B7A0681E29830911028F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46A9E62363CE7C3ABCBB8F7B /* Pods_Tabigram.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EF80756C25CBBFCA00BDA7E9 = {
 			isa = PBXGroup;
 			children = (
 				EF80757725CBBFCA00BDA7E9 /* Tabigram */,
 				EF80757625CBBFCA00BDA7E9 /* Products */,
+				85A997A97F44BCE8EF623EDB /* Pods */,
+				B74B7A0681E29830911028F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -280,9 +305,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF80758925CBBFCD00BDA7E9 /* Build configuration list for PBXNativeTarget "Tabigram" */;
 			buildPhases = (
+				60ADC7E64AF611D0EE8A090D /* [CP] Check Pods Manifest.lock */,
 				EF80757125CBBFCA00BDA7E9 /* Sources */,
 				EF80757225CBBFCA00BDA7E9 /* Frameworks */,
 				EF80757325CBBFCA00BDA7E9 /* Resources */,
+				C1A2ADBC22D9B87B52EEFE30 /* [CP] Embed Pods Frameworks */,
+				36D9AB13C47751C7E93FF03E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -368,6 +396,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36D9AB13C47751C7E93FF03E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		60ADC7E64AF611D0EE8A090D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tabigram-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1A2ADBC22D9B87B52EEFE30 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EF80757125CBBFCA00BDA7E9 /* Sources */ = {
@@ -531,6 +618,7 @@
 		};
 		EF80758A25CBBFCD00BDA7E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AE50ABE6965CC4DFEAA4C68 /* Pods-Tabigram.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -550,6 +638,7 @@
 		};
 		EF80758B25CBBFCD00BDA7E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1F169B3FDB53AA3FAB8BBFF /* Pods-Tabigram.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
