@@ -8,6 +8,7 @@
 import UIKit
 import GoogleMaps
 import CoreLocation
+import GoogleMaps
 import GooglePlaces
 import Firebase
 import FirebaseAuth

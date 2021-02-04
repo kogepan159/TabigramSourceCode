@@ -19,7 +19,6 @@
 		EF8075B425CBC06B00BDA7E9 /* tabigram001.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EF80759325CBC06B00BDA7E9 /* tabigram001.jpeg */; };
 		EF8075B525CBC06B00BDA7E9 /* save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF80759425CBC06B00BDA7E9 /* save@2x.png */; };
 		EF8075B625CBC06B00BDA7E9 /* profile_placeholder.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */; };
-		EF8075B725CBC06B00BDA7E9 /* TanukiMagic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759725CBC06B00BDA7E9 /* TanukiMagic.ttf */; };
 		EF8075B825CBC06B00BDA7E9 /* sarial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759825CBC06B00BDA7E9 /* sarial.ttf */; };
 		EF8075B925CBC06B00BDA7E9 /* Billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759925CBC06B00BDA7E9 /* Billabong.ttf */; };
 		EF8075BA25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF80759A25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf */; };
@@ -309,6 +308,7 @@
 				EF80757225CBBFCA00BDA7E9 /* Frameworks */,
 				EF80757325CBBFCA00BDA7E9 /* Resources */,
 				C1A2ADBC22D9B87B52EEFE30 /* [CP] Embed Pods Frameworks */,
+				22311F9487E4E4F77AF9541A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -367,7 +367,6 @@
 				EF8075C525CBC06B00BDA7E9 /* Icon-App-29x29@3x.png in Resources */,
 				EF8075C225CBC06B00BDA7E9 /* ItunesArtwork@2x.png in Resources */,
 				EF8075CC25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg in Resources */,
-				EF8075B725CBC06B00BDA7E9 /* TanukiMagic.ttf in Resources */,
 				EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */,
 				EF8075BF25CBC06B00BDA7E9 /* Icon-App-20x20@1x.png in Resources */,
 				EF8075BE25CBC06B00BDA7E9 /* Icon-App-40x40@1x.png in Resources */,
@@ -396,6 +395,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22311F9487E4E4F77AF9541A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		60ADC7E64AF611D0EE8A090D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
