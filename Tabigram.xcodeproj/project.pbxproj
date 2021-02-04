@@ -56,7 +56,7 @@
 		EF8075FA25CBC35A00BDA7E9 /* FrontViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075F925CBC35A00BDA7E9 /* FrontViewController.swift */; };
 		EF8075FD25CBC3A800BDA7E9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */; };
 		EF80760125CBC3C600BDA7E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */; };
-		EF80762225CBC9A700BDA7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF80762125CBC9A700BDA7E9 /* GoogleService-Info.plist */; };
+		EF80762725CBCD9C00BDA7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,7 +113,7 @@
 		EF8075F925CBC35A00BDA7E9 /* FrontViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontViewController.swift; sourceTree = "<group>"; };
 		EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		EF80762125CBC9A700BDA7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +173,7 @@
 				EF80757E25CBBFCA00BDA7E9 /* Main.storyboard */,
 				EF80758325CBBFCD00BDA7E9 /* LaunchScreen.storyboard */,
 				EF80758125CBBFCD00BDA7E9 /* Assets.xcassets */,
-				EF80762125CBC9A700BDA7E9 /* GoogleService-Info.plist */,
+				EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */,
 				EF80758625CBBFCD00BDA7E9 /* Info.plist */,
 			);
 			path = Tabigram;
@@ -387,7 +387,7 @@
 				EF8075CB25CBC06B00BDA7E9 /* Icon-App-29x29@2x.png in Resources */,
 				EF8075B425CBC06B00BDA7E9 /* tabigram001.jpeg in Resources */,
 				EF8075C725CBC06B00BDA7E9 /* Icon-App-60x60@3x.png in Resources */,
-				EF80762225CBC9A700BDA7E9 /* GoogleService-Info.plist in Resources */,
+				EF80762725CBCD9C00BDA7E9 /* GoogleService-Info.plist in Resources */,
 				EF8075C425CBC06B00BDA7E9 /* Icon-App-20x20@2x.png in Resources */,
 				EF8075B625CBC06B00BDA7E9 /* profile_placeholder.jpeg in Resources */,
 				EF8075C925CBC06B00BDA7E9 /* Icon-App-76x76@1x.png in Resources */,
