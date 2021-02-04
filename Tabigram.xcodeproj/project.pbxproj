@@ -31,7 +31,6 @@
 		EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */; };
 		EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */; };
 		EF8075C225CBC06B00BDA7E9 /* ItunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */; };
-		EF8075C325CBC06B00BDA7E9 /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A525CBC06B00BDA7E9 /* Contents.json */; };
 		EF8075C425CBC06B00BDA7E9 /* Icon-App-20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */; };
 		EF8075C525CBC06B00BDA7E9 /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */; };
 		EF8075C625CBC06B00BDA7E9 /* Icon-App-40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */; };
@@ -88,7 +87,6 @@
 		EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-83.5x83.5@2x.png"; sourceTree = "<group>"; };
 		EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@3x.png"; sourceTree = "<group>"; };
 		EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ItunesArtwork@2x.png"; sourceTree = "<group>"; };
-		EF8075A525CBC06B00BDA7E9 /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-20x20@2x.png"; sourceTree = "<group>"; };
 		EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-29x29@3x.png"; sourceTree = "<group>"; };
 		EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-App-40x40@2x.png"; sourceTree = "<group>"; };
@@ -182,12 +180,6 @@
 		EF80758E25CBC06B00BDA7E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EF80758F25CBC06B00BDA7E9 /* search@2x.png */,
-				EF80759025CBC06B00BDA7E9 /* editProfileImage@2x.png */,
-				EF80759125CBC06B00BDA7E9 /* profile@2x.png */,
-				EF80759425CBC06B00BDA7E9 /* save@2x.png */,
-				EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */,
-				EF8075B025CBC06B00BDA7E9 /* worldMap.jpg */,
 				EF80759225CBC06B00BDA7E9 /* Images */,
 				EF80759625CBC06B00BDA7E9 /* Font */,
 				EF80759B25CBC06B00BDA7E9 /* Icon */,
@@ -198,6 +190,12 @@
 		EF80759225CBC06B00BDA7E9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				EF80759525CBC06B00BDA7E9 /* profile_placeholder.jpeg */,
+				EF8075B025CBC06B00BDA7E9 /* worldMap.jpg */,
+				EF80759425CBC06B00BDA7E9 /* save@2x.png */,
+				EF80759125CBC06B00BDA7E9 /* profile@2x.png */,
+				EF80759025CBC06B00BDA7E9 /* editProfileImage@2x.png */,
+				EF80758F25CBC06B00BDA7E9 /* search@2x.png */,
 				EF80759325CBC06B00BDA7E9 /* tabigram001.jpeg */,
 			);
 			path = Images;
@@ -217,8 +215,8 @@
 		EF80759B25CBC06B00BDA7E9 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
-				EF80759C25CBC06B00BDA7E9 /* iTunesArtwork@1x.png */,
 				EF80759D25CBC06B00BDA7E9 /* AppIcon.appiconset */,
+				EF80759C25CBC06B00BDA7E9 /* iTunesArtwork@1x.png */,
 				EF8075AE25CBC06B00BDA7E9 /* iTunesArtwork@2x.jpg */,
 				EF8075AF25CBC06B00BDA7E9 /* iTunesArtwork@3x.png */,
 			);
@@ -235,7 +233,6 @@
 				EF8075A225CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png */,
 				EF8075A325CBC06B00BDA7E9 /* Icon-App-20x20@3x.png */,
 				EF8075A425CBC06B00BDA7E9 /* ItunesArtwork@2x.png */,
-				EF8075A525CBC06B00BDA7E9 /* Contents.json */,
 				EF8075A625CBC06B00BDA7E9 /* Icon-App-20x20@2x.png */,
 				EF8075A725CBC06B00BDA7E9 /* Icon-App-29x29@3x.png */,
 				EF8075A825CBC06B00BDA7E9 /* Icon-App-40x40@2x.png */,
@@ -312,7 +309,6 @@
 				EF80757225CBBFCA00BDA7E9 /* Frameworks */,
 				EF80757325CBBFCA00BDA7E9 /* Resources */,
 				C1A2ADBC22D9B87B52EEFE30 /* [CP] Embed Pods Frameworks */,
-				36D9AB13C47751C7E93FF03E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -374,7 +370,6 @@
 				EF8075B725CBC06B00BDA7E9 /* TanukiMagic.ttf in Resources */,
 				EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */,
 				EF8075BF25CBC06B00BDA7E9 /* Icon-App-20x20@1x.png in Resources */,
-				EF8075C325CBC06B00BDA7E9 /* Contents.json in Resources */,
 				EF8075BE25CBC06B00BDA7E9 /* Icon-App-40x40@1x.png in Resources */,
 				EF8075B925CBC06B00BDA7E9 /* Billabong.ttf in Resources */,
 				EF8075CE25CBC06B00BDA7E9 /* worldMap.jpg in Resources */,
@@ -401,23 +396,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36D9AB13C47751C7E93FF03E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tabigram/Pods-Tabigram-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		60ADC7E64AF611D0EE8A090D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
