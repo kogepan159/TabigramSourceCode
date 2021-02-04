@@ -264,7 +264,7 @@ extension ViewController: GMSMapViewDelegate {
             if user != nil {
                 self.place.addDocument(data: data) { (error) in
                     if error != nil {
-                        SVProgressHUD.showError(withStatus: error!.localizedDescription)
+                        print("保存失敗です")
                     } else {
                         let alertController = UIAlertController(title: "保存成功", message: "保存が成功しました", preferredStyle: .alert)
                         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in

@@ -14,6 +14,10 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    // 取得したAPIキーの設定
+    let GoogleMapsAPIKey = "AIzaSyBF52sdfRxP8t1bO6lDWMiPc9Jtd6q3EVQ"
+    let GooglePlacesAPIKey = "AIzaSyAF705rAXDQ0pi8--rhKYkxbkiSimo_5R4"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
