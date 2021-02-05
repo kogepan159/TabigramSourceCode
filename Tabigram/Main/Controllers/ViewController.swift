@@ -157,7 +157,7 @@ class ViewController: UIViewController {
                             let status = val.get("status") as! Bool
                             let area = val.get("area") as! String
                             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                            self.showMaker(position: location, title: name, detailMemo: memo)
+                            self.showMaker(position: location, title: name, detailMemo: memo, status: status)
                             self.visitedNumber = (querySnapshot?.documents.count)!
                             let pin = Pin(latitude: latitude, longitude: longitude, title: name, user: user, detailMemo: memo, status: status, area: area)
                             self.pins.append(pin)
@@ -181,45 +181,27 @@ class ViewController: UIViewController {
 extension ViewController: GMSMapViewDelegate {
     
     //マーカーを打ち込む
-    func showMaker(position: CLLocationCoordinate2D, title: String, detailMemo: String) {
+    func showMaker(position: CLLocationCoordinate2D, title: String, detailMemo: String, status: Bool) {
         let marker = GMSMarker()
         marker.position = position
         marker.title = title
         marker.snippet = detailMemo
-        
-        self.db = Firestore.firestore()
-        self.place = db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
-        if place.collectionID.count != 0 {
-            //self.place.whereField("user", isEqualTo: Auth.auth().currentUser?.displayName)
-            self.place.getDocuments { (querySnapshot, error) in
-                if error != nil {
-                    print("何らかの理由で読み取りできませんでした。")
-                } else {
-                    if querySnapshot!.documents.count != 0 {
-                        for val in querySnapshot!.documents {
-                            let status = val.get("status") as! Bool
-                            if status == true {
-                                if marker.title?.count != 0 {
-                                    marker.appearAnimation = GMSMarkerAnimation.pop
-                                    //マーカーをmapviewに表示
-                                    marker.map = self.mapView
-                                    marker.icon = GMSMarker.markerImage(with: UIColor.green)
-                                    print("お気に入りのマーカーを打ち込みました")
-                                }
-                            } else {
-                                if marker.title?.count != 0 {
-                                    marker.appearAnimation = GMSMarkerAnimation.pop
-                                    //マーカーをmapviewに表示
-                                    marker.map = self.mapView
-                                    marker.icon = GMSMarker.markerImage(with: UIColor.red)
-                                    print("普通のマーカーを打ち込みました")
-                                }
-                            }
-                        }
-                    } else {
-                        print("データがひとつもないです。。")
-                    }
-                }
+        if status == true {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                marker.icon = GMSMarker.markerImage(with: UIColor.green)
+                print("お気に入りのマーカーを打ち込みました")
+            }
+        } else {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                marker.icon = GMSMarker.markerImage(with: UIColor.red)
+                print("普通のマーカーを打ち込みました")
+                
             }
         }
     }
@@ -243,7 +225,7 @@ extension ViewController: GMSMapViewDelegate {
             print(self.titleText)
             print(self.detailMemo)
             //マーカーを生成する（タイトルをつけた時のみ）
-            self.showMaker(position: coordinate, title: self.titleText, detailMemo: self.detailMemo)
+            self.showMaker(position: coordinate, title: self.titleText, detailMemo: self.detailMemo, status: false)
             //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
             let pin = Pin(latitude: coordinate.latitude, longitude: coordinate.longitude, title: self.titleText, user: (Auth.auth().currentUser?.displayName)!, detailMemo: self.detailMemo, status: false, area: self.area)
             self.pins.append(pin)
@@ -268,7 +250,6 @@ extension ViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            //self.loadLocations()
             for pin in self.pins {
                 if marker.position.latitude == pin.latitude {
                     self.countFavoritedLabel.text = String(self.favoriteNumber)
@@ -277,6 +258,7 @@ extension ViewController: GMSMapViewDelegate {
                     self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["status": true]) { err in
                         if let err = err {
                         } else {
+                            self.loadLocations()
                         }
                     }
                 }
@@ -423,7 +405,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
         
         //検索場所にマーカーを打つ
-        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!, detailMemo: "")
+        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!, detailMemo: "", status: false)
         
         //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
         let pin = Pin(latitude: latitude, longitude: longitude, title: place.name!, user: (Auth.auth().currentUser?.displayName)!, detailMemo: "", status: false, area: area)
@@ -475,9 +457,9 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     
     // ボタンが押された時に呼ばれるメソッド（検索ウィンドウを表示させる）
     @objc func buttonEvent(_ sender: UIButton) {
-//        let autocompleteController = GMSAutocompleteViewController()
-//        autocompleteController.delegate = self
-//        present(autocompleteController, animated: true, completion: nil)
+        //        let autocompleteController = GMSAutocompleteViewController()
+        //        autocompleteController.delegate = self
+        //        present(autocompleteController, animated: true, completion: nil)
         self.performSegue(withIdentifier: "Follow", sender: nil)
     }
     

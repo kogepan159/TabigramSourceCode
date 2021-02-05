@@ -16,6 +16,7 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Do any additional setup after loading the view.
         backButton()
+        makeProfileButton()
         
         followTableView.delegate = self
         followTableView.dataSource = self
@@ -66,6 +67,25 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // 戻るボタンが押された時に呼ばれるメソッド（保存する）
     @objc func toBackButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    //ユーザプロフィールを表示
+    func makeProfileButton() {
+        let button = UIButton()
+        let screenwidth = Float(UIScreen.main.bounds.size.width)
+        button.frame = CGRect(x: Int(screenwidth) - 60, y: 55, width: 45, height: 45)
+        button.backgroundColor = UIColor.white
+        button.setImage(UIImage(named: "profile@2x.png"), for: .normal)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = button.frame.height/2
+        self.view.addSubview(button)
+        //ボタンで実行する処理
+        button.addTarget(self, action: #selector(FollowViewController.toProfileButton(_:)), for: UIControl.Event.touchUpInside)
+    }
+    
+    // ユーザボタンが押された時に呼ばれるメソッド（保存する）
+    @objc func toProfileButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "Profile", sender: nil)
     }
     
 }
