@@ -73,6 +73,7 @@ class ViewController: UIViewController {
         marker.position = CLLocationCoordinate2DMake(35.68154,139.752498)
         marker.title = "The Imperial Palace"
         marker.snippet = "Tokyo"
+        marker.icon = self.imageWithImage(image: UIImage(named: "profile_placeholder.jpeg")!, scaledToSize: CGSize(width: 15.0, height: 15.0))
         marker.map = mapView
     }
     
@@ -82,6 +83,14 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.modalPresentationStyle = .fullScreen
+    }
+    
+    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
     
     //きちんとログインされているかどうかを審査する関数
@@ -466,9 +475,10 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     
     // ボタンが押された時に呼ばれるメソッド（検索ウィンドウを表示させる）
     @objc func buttonEvent(_ sender: UIButton) {
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self
-        present(autocompleteController, animated: true, completion: nil)
+//        let autocompleteController = GMSAutocompleteViewController()
+//        autocompleteController.delegate = self
+//        present(autocompleteController, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "Follow", sender: nil)
     }
     
 }

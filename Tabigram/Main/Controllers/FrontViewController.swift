@@ -29,9 +29,10 @@ class FrontViewController: UIViewController {
     
     func labelChange() {
         let label = UILabel()
+        let label2 = UILabel()
         let screenwidth = Float(UIScreen.main.bounds.size.width)
         let screenheight = Float(UIScreen.main.bounds.size.height)
-        let width = 300
+        let width = 350
         let height = 120
         let widthGap = (screenwidth - Float(width)) / 2
         let heightGap = (screenheight - Float(height)) / 2
@@ -42,10 +43,18 @@ class FrontViewController: UIViewController {
         label.font = UIFont(name: "Billabong", size: 80)
         self.view.addSubview(label)
         
-        UIView.animate(withDuration: 2.0, delay: 0.5, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveLinear, animations: {
             label.frame = CGRect(x: Int(widthGap), y: 70, width: Int(width), height: Int(height))
         }, completion: { (finished: Bool) in
             label.textColor = UIColor.black
+            
+            label2.frame = CGRect(x: Int(widthGap), y: Int(heightGap), width: Int(width), height: Int(height))
+            label2.textColor = UIColor.black
+            label2.text = "Record your memories of your trip"
+            label2.textAlignment = NSTextAlignment.center
+            label2.font = UIFont.italicSystemFont(ofSize: 20)
+            self.view.addSubview(label2)
+            
             self.startButton.isHidden = false
             self.logOutButton.isHidden = false
         })
