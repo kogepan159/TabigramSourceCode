@@ -158,6 +158,7 @@ class ViewController: UIViewController {
                         }
                         print(self.pins.count)
                         self.countVisitedLabel.text = String(self.visitedNumber)
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
                     } else {
                         print("データがひとつもないです。。")
                     }
@@ -177,11 +178,40 @@ extension ViewController: GMSMapViewDelegate {
         marker.title = title
         marker.snippet = detailMemo
         
-        //場所名が記入された時のみマーカーを生成
-        if marker.title?.count != 0 {
-            marker.appearAnimation = GMSMarkerAnimation.pop
-            //マーカーをmapviewに表示
-            marker.map = self.mapView
+        self.db = Firestore.firestore()
+        self.place = db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+        if place.collectionID.count != 0 {
+            //self.place.whereField("user", isEqualTo: Auth.auth().currentUser?.displayName)
+            self.place.getDocuments { (querySnapshot, error) in
+                if error != nil {
+                    print("何らかの理由で読み取りできませんでした。")
+                } else {
+                    if querySnapshot!.documents.count != 0 {
+                        for val in querySnapshot!.documents {
+                            let status = val.get("status") as! Bool
+                            if status == true {
+                                if marker.title?.count != 0 {
+                                    marker.appearAnimation = GMSMarkerAnimation.pop
+                                    //マーカーをmapviewに表示
+                                    marker.map = self.mapView
+                                    marker.icon = GMSMarker.markerImage(with: UIColor.green)
+                                    print("お気に入りのマーカーを打ち込みました")
+                                }
+                            } else {
+                                if marker.title?.count != 0 {
+                                    marker.appearAnimation = GMSMarkerAnimation.pop
+                                    //マーカーをmapviewに表示
+                                    marker.map = self.mapView
+                                    marker.icon = GMSMarker.markerImage(with: UIColor.red)
+                                    print("普通のマーカーを打ち込みました")
+                                }
+                            }
+                        }
+                    } else {
+                        print("データがひとつもないです。。")
+                    }
+                }
+            }
         }
     }
     
@@ -229,22 +259,15 @@ extension ViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            self.loadLocations()
+            //self.loadLocations()
             for pin in self.pins {
-                print(self.pins.count)
-                print("今からstatusを変えたい")
                 if marker.position.latitude == pin.latitude {
-                    print("今からstatusを変えるよ！！！！")
-                    marker.icon = GMSMarker.markerImage(with: UIColor.green)
                     self.countFavoritedLabel.text = String(self.favoriteNumber)
                     self.db = Firestore.firestore()
                     self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
-                    self.place.document(String(pin.latitude)).updateData(["status": true]) { err in
+                    self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["status": true]) { err in
                         if let err = err {
-                            print("Error updating document: \(err)")
                         } else {
-                            print("Document successfully updated")
-                            
                         }
                     }
                 }
@@ -343,7 +366,7 @@ extension ViewController: GMSMapViewDelegate {
             let data = ["latitude":i.latitude, "longitude":i.longitude, "title":i.title, "user": Auth.auth().currentUser?.displayName!, "detailMemo": self.detailMemo, "status":false, "area": area] as [String : Any]
             let user = Auth.auth().currentUser
             if user != nil {
-                self.place.document(String(i.latitude)).setData(data) { (error) in
+                self.place.document(String(i.latitude) + String(i.longitude)).setData(data) { (error) in
                     //self.place.addDocument(data: data) { (error) in
                     if error != nil {
                         print("保存失敗です")
@@ -352,7 +375,7 @@ extension ViewController: GMSMapViewDelegate {
                         let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                             self.pins = [Pin]()
                             self.db = Firestore.firestore()
-                            self.place = self.db.collection("place")
+                            self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
                             self.place.getDocuments { (querySnapshot, error) in
                                 self.visitedNumber = (querySnapshot?.documents.count)!
                                 self.countVisitedLabel.text = String(self.visitedNumber)
