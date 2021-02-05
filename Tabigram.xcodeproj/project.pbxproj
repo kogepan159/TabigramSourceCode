@@ -59,6 +59,7 @@
 		EF8075FD25CBC3A800BDA7E9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */; };
 		EF80760125CBC3C600BDA7E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */; };
 		EF80762725CBCD9C00BDA7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */; };
+		EFB26D2425CD885B00607DD0 /* marker_icon_mikan.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB26D2325CD885B00607DD0 /* marker_icon_mikan.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		EF8075FC25CBC3A800BDA7E9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EFB26D2325CD885B00607DD0 /* marker_icon_mikan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_icon_mikan.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 		EF80758E25CBC06B00BDA7E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EFB26D2325CD885B00607DD0 /* marker_icon_mikan.png */,
 				EF3F08A625CCDAA300FDF566 /* back@2x.png */,
 				EF80759225CBC06B00BDA7E9 /* Images */,
 				EF80759625CBC06B00BDA7E9 /* Font */,
@@ -371,6 +374,7 @@
 				EF8075BC25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png in Resources */,
 				EF3F08A725CCDAA300FDF566 /* back@2x.png in Resources */,
 				EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */,
+				EFB26D2425CD885B00607DD0 /* marker_icon_mikan.png in Resources */,
 				EF8075E425CBC22500BDA7E9 /* SignIn.storyboard in Resources */,
 				EF8075BD25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png in Resources */,
 				EF8075CA25CBC06B00BDA7E9 /* Icon-App-40x40@3x.png in Resources */,

@@ -69,12 +69,35 @@ class ViewController: UIViewController {
         makeProfileButton()
         makeToHomeButton()
         
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(35.68154,139.752498)
-        marker.title = "The Imperial Palace"
-        marker.snippet = "Tokyo"
-        marker.icon = self.imageWithImage(image: UIImage(named: "profile_placeholder.jpeg")!, scaledToSize: CGSize(width: 15.0, height: 15.0))
-        marker.map = mapView
+        //segmentControlを設定
+        let screenwidth = Float(UIScreen.main.bounds.size.width)
+        let width = 200
+        let widthGap = (screenwidth - Float(width)) / 2
+        // セグメントに追加するテキストの設定
+        let params = ["Open Mode", "Private Mode"]
+        // UISegmentedControlを生成
+        let mySegment = UISegmentedControl(items: params)
+        mySegment.frame = CGRect(x: Int(widthGap), y: Int(self.mapView.bounds.height) - 55, width: Int(width), height: 40)
+        // 選択されたセグメントの背景色の設定
+        mySegment.tintColor = UIColor(red: 0.13, green: 0.61, blue: 0.93, alpha: 1.0)
+        // セグメントの背景色の設定
+        mySegment.backgroundColor = UIColor(red: 0.96, green: 0.98, blue: 1.00, alpha: 1.0)
+        // 選択されたセグメントのフォントと文字色の設定
+        mySegment.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "HiraKakuProN-W6", size: 12.0)!,
+            NSAttributedString.Key.foregroundColor: UIColor.white
+            ], for: .selected)
+        // セグメントのフォントと文字色の設定
+        mySegment.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "HiraKakuProN-W3", size: 12.0)!,
+            NSAttributedString.Key.foregroundColor: UIColor(red: 0.30, green: 0.49, blue: 0.62, alpha: 1.0)
+            ], for: .normal)
+        // セグメントの選択
+        mySegment.selectedSegmentIndex = 0
+        // セグメントが変更された時に呼び出すメソッドの設定
+        mySegment.addTarget(self, action: #selector(segmentChanged(_:)), for: UIControl.Event.valueChanged)
+        // UISegmentedControlを追加
+        self.mapView.addSubview(mySegment)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +133,18 @@ class ViewController: UIViewController {
                 UIApplication.shared.keyWindow?.rootViewController = rootViewController
             } catch let signOutError as NSError {
             }
+        }
+    }
+    
+    // セグメントが変更された時に呼び出されるメソッド
+    @objc func segmentChanged(_ segment:UISegmentedControl) {
+        switch segment.selectedSegmentIndex {
+        case 0:
+            print("左を選択した。")
+        case 1:
+            print("中央を選択した。")
+        default:
+            break
         }
     }
     
@@ -192,6 +227,18 @@ extension ViewController: GMSMapViewDelegate {
                 //マーカーをmapviewに表示
                 marker.map = self.mapView
                 marker.icon = GMSMarker.markerImage(with: UIColor.green)
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .white
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .brown
+                markerView.addSubview(label)
+                marker.iconView = markerView
                 print("お気に入りのマーカーを打ち込みました")
             }
         } else {
@@ -200,6 +247,7 @@ extension ViewController: GMSMapViewDelegate {
                 //マーカーをmapviewに表示
                 marker.map = self.mapView
                 marker.icon = GMSMarker.markerImage(with: UIColor.red)
+                //marker.icon = UIImage(named: "marker_icon_mikan.png")
                 print("普通のマーカーを打ち込みました")
                 
             }
@@ -249,7 +297,7 @@ extension ViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             for pin in self.pins {
                 if marker.position.latitude == pin.latitude {
                     self.countFavoritedLabel.text = String(self.favoriteNumber)
@@ -265,7 +313,10 @@ extension ViewController: GMSMapViewDelegate {
             }
             alertController.dismiss(animated: true, completion: nil)
         })
-        
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
         alertController.addAction(action)
         self.present(alertController, animated: true, completion: nil)
     }
