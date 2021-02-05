@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A145F9E90334677229121B3 /* Pods_Tabigram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A9E62363CE7C3ABCBB8F7B /* Pods_Tabigram.framework */; };
+		EF3F08A725CCDAA300FDF566 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF3F08A625CCDAA300FDF566 /* back@2x.png */; };
 		EF80757925CBBFCA00BDA7E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */; };
 		EF80757D25CBBFCA00BDA7E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */; };
 		EF80758025CBBFCA00BDA7E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF80757E25CBBFCA00BDA7E9 /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		46A9E62363CE7C3ABCBB8F7B /* Pods_Tabigram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tabigram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AE50ABE6965CC4DFEAA4C68 /* Pods-Tabigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tabigram.debug.xcconfig"; path = "Target Support Files/Pods-Tabigram/Pods-Tabigram.debug.xcconfig"; sourceTree = "<group>"; };
 		B1F169B3FDB53AA3FAB8BBFF /* Pods-Tabigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tabigram.release.xcconfig"; path = "Target Support Files/Pods-Tabigram/Pods-Tabigram.release.xcconfig"; sourceTree = "<group>"; };
+		EF3F08A625CCDAA300FDF566 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		EF80757525CBBFCA00BDA7E9 /* Tabigram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tabigram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF80757825CBBFCA00BDA7E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF80757C25CBBFCA00BDA7E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		EF80758E25CBC06B00BDA7E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EF3F08A625CCDAA300FDF566 /* back@2x.png */,
 				EF80759225CBC06B00BDA7E9 /* Images */,
 				EF80759625CBC06B00BDA7E9 /* Font */,
 				EF80759B25CBC06B00BDA7E9 /* Icon */,
@@ -359,6 +362,7 @@
 				EF8075B125CBC06B00BDA7E9 /* search@2x.png in Resources */,
 				EF80758525CBBFCD00BDA7E9 /* LaunchScreen.storyboard in Resources */,
 				EF8075BC25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png in Resources */,
+				EF3F08A725CCDAA300FDF566 /* back@2x.png in Resources */,
 				EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */,
 				EF8075E425CBC22500BDA7E9 /* SignIn.storyboard in Resources */,
 				EF8075BD25CBC06B00BDA7E9 /* Icon-App-29x29@1x.png in Resources */,

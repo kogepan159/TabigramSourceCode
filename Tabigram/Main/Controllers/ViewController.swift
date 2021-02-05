@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     var worldArray = [String]()
     var dayArray = [String]()
     var memoArray = [String]()
-
+    
     //mapViewを表示させる（マップの表示）
     @IBOutlet var mapView: GMSMapView!
     //位置情報の使用
@@ -39,11 +39,15 @@ class ViewController: UIViewController {
     //マーカーがお気に入りかどうかを判定するための変数
     var markerStatus = false
     
+    //マーカー用
+    var titleText = ""
+    var detailMemo = ""
+    var area = "Japan"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //現在のログインユーザーがいるかどうかrの確認
-        print(Auth.auth().currentUser?.displayName!)
+        //現在のログインユーザーがいるかどうかの確認
         userCheck()
         
         // フォント種をTime New Roman、サイズを10に指定
@@ -63,6 +67,7 @@ class ViewController: UIViewController {
         makeMap()
         makeSearchButton()
         makeProfileButton()
+        makeToHomeButton()
         
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(35.68154,139.752498)
@@ -73,6 +78,10 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         loadLocations()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.modalPresentationStyle = .fullScreen
     }
     
     //きちんとログインされているかどうかを審査する関数
@@ -115,22 +124,42 @@ class ViewController: UIViewController {
     
     //ピン読み取り
     func loadLocations() {
+        //一旦リセット
+        self.visitedNumber = 0
+        self.favoriteNumber = 0
+        self.pins.removeAll()
+        
         self.db = Firestore.firestore()
-        self.place = db.collection("place")
+        self.place = db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
         if place.collectionID.count != 0 {
-            self.place.whereField("user", isEqualTo: Auth.auth().currentUser?.displayName)
+            //self.place.whereField("user", isEqualTo: Auth.auth().currentUser?.displayName)
             self.place.getDocuments { (querySnapshot, error) in
                 if error != nil {
                     print("何らかの理由で読み取りできませんでした。")
                 } else {
-                    for val in querySnapshot!.documents {
-                        let longitude = val.get("longitude") as! CLLocationDegrees
-                        let latitude = val.get("latitude") as! CLLocationDegrees
-                        let name = val.get("title") as! String
-                        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        self.showMaker(position: location, title: name)
-                        self.visitedNumber = (querySnapshot?.documents.count)!
+                    if querySnapshot!.documents.count != 0 {
+                        print("loadできています")
+                        for val in querySnapshot!.documents {
+                            let longitude = val.get("longitude") as! CLLocationDegrees
+                            let latitude = val.get("latitude") as! CLLocationDegrees
+                            let name = val.get("title") as! String
+                            let memo = val.get("detailMemo") as! String
+                            let user = val.get("user") as! String
+                            let status = val.get("status") as! Bool
+                            let area = val.get("area") as! String
+                            let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                            self.showMaker(position: location, title: name, detailMemo: memo)
+                            self.visitedNumber = (querySnapshot?.documents.count)!
+                            let pin = Pin(latitude: latitude, longitude: longitude, title: name, user: user, detailMemo: memo, status: status, area: area)
+                            self.pins.append(pin)
+                            if status == true {
+                                self.favoriteNumber += 1
+                            }
+                        }
+                        print(self.pins.count)
                         self.countVisitedLabel.text = String(self.visitedNumber)
+                    } else {
+                        print("データがひとつもないです。。")
                     }
                 }
             }
@@ -142,11 +171,12 @@ class ViewController: UIViewController {
 extension ViewController: GMSMapViewDelegate {
     
     //マーカーを打ち込む
-    func showMaker(position: CLLocationCoordinate2D, title: String) {
+    func showMaker(position: CLLocationCoordinate2D, title: String, detailMemo: String) {
         let marker = GMSMarker()
         marker.position = position
         marker.title = title
-        marker.snippet = title
+        marker.snippet = detailMemo
+        
         //場所名が記入された時のみマーカーを生成
         if marker.title?.count != 0 {
             marker.appearAnimation = GMSMarkerAnimation.pop
@@ -163,29 +193,63 @@ extension ViewController: GMSMapViewDelegate {
         }
         //okした時の処理
         let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.loadLocations()
+            for text in alert.textFields! {
+                if text.tag == 1 {
+                    self.titleText = text.text ?? "nil"
+                } else {
+                    self.detailMemo = text.text ?? "nil"
+                }
+            }
+            print(self.titleText)
+            print(self.detailMemo)
             //マーカーを生成する（タイトルをつけた時のみ）
-            self.showMaker(position: coordinate, title: (alert.textFields?.first?.text)!)
+            self.showMaker(position: coordinate, title: self.titleText, detailMemo: self.detailMemo)
             //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
-            let pin = Pin(latitude: coordinate.latitude, longitude: coordinate.longitude, title: (alert.textFields?.first?.text)!, status: false)
+            let pin = Pin(latitude: coordinate.latitude, longitude: coordinate.longitude, title: self.titleText, user: (Auth.auth().currentUser?.displayName)!, detailMemo: self.detailMemo, status: false, area: self.area)
             self.pins.append(pin)
             self.savePins()
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cancelAction)
         alert.addAction(okAction)
-        alert.addTextField { (textField) in
-            textField.placeholder = "場所名を記入"
-        }
+        //textfiled1の追加
+        alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+            text.placeholder = "場所名を記入"
+            text.tag  = 1
+        })
+        //textfiled2の追加
+        alert.addTextField(configurationHandler: {(text:UITextField!) -> Void in
+            text.placeholder = "一番の思い出を記入"
+            text.tag  = 2
+        })
         self.present(alert, animated: true, completion: nil)
     }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
         let action = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            marker.icon = GMSMarker.markerImage(with: .blue)
-            //self.updatePins()
+            self.loadLocations()
+            for pin in self.pins {
+                print(self.pins.count)
+                print("今からstatusを変えたい")
+                if marker.position.latitude == pin.latitude {
+                    print("今からstatusを変えるよ！！！！")
+                    marker.icon = GMSMarker.markerImage(with: UIColor.green)
+                    self.countFavoritedLabel.text = String(self.favoriteNumber)
+                    self.db = Firestore.firestore()
+                    self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                    self.place.document(String(pin.latitude)).updateData(["status": true]) { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
+                            
+                        }
+                    }
+                }
+            }
             alertController.dismiss(animated: true, completion: nil)
-
         })
         
         alertController.addAction(action)
@@ -226,7 +290,7 @@ extension ViewController: GMSMapViewDelegate {
         let screenwidth = Float(UIScreen.main.bounds.size.width)
         let width = 200
         let widthGap = (screenwidth - Float(width)) / 2
-        label.frame = CGRect(x: Int(widthGap), y: 5, width: Int(width), height: 70)
+        label.frame = CGRect(x: Int(widthGap), y: 50, width: Int(width), height: 70)
         label.textColor = UIColor.black
         label.text = "Tabigram"
         label.textAlignment = NSTextAlignment.center
@@ -234,11 +298,28 @@ extension ViewController: GMSMapViewDelegate {
         self.mapView.addSubview(label)
     }
     
+    //Homeに戻る透明なボタンを表示
+    func makeToHomeButton() {
+        let button = UIButton()
+        let screenwidth = Float(UIScreen.main.bounds.size.width)
+        let width = 200
+        let widthGap = (screenwidth - Float(width)) / 2
+        button.frame = CGRect(x: Int(widthGap), y: 50, width: Int(width), height: 70)
+        self.mapView.addSubview(button)
+        //ボタンで実行する処理
+        button.addTarget(self, action: #selector(ViewController.toHomeButton(_:)), for: UIControl.Event.touchUpInside)
+    }
+    
+    // ユーザボタンが押された時に呼ばれるメソッド（保存する）
+    @objc func toHomeButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //ユーザプロフィールを表示
     func makeProfileButton() {
         let button = UIButton()
         let screenwidth = Float(UIScreen.main.bounds.size.width)
-        button.frame = CGRect(x: Int(screenwidth) - 60, y: 15, width: 45, height: 45)
+        button.frame = CGRect(x: Int(screenwidth) - 60, y: 55, width: 45, height: 45)
         button.backgroundColor = UIColor.white
         button.setImage(UIImage(named: "profile@2x.png"), for: .normal)
         button.layer.masksToBounds = true
@@ -250,20 +331,20 @@ extension ViewController: GMSMapViewDelegate {
     
     // ユーザボタンが押された時に呼ばれるメソッド（保存する）
     @objc func toProfileButton(_ sender: UIButton) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let second = storyboard.instantiateViewController(withIdentifier: "Profile")
-        self.present(second, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "Profile", sender: nil)
     }
     
     //ピンを保存する関数
     func savePins() {
         self.db = Firestore.firestore()
-        self.place = db.collection("place")
+        self.place = db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
         for i in pins {
-            let data = ["latitude":i.latitude,"longitude":i.longitude,"title":i.title,"user": Auth.auth().currentUser?.displayName, "status":false] as [String : Any]
+            //self.area = self.areaCalculate(latitude: i.latitude, longitude: i.longitude)
+            let data = ["latitude":i.latitude, "longitude":i.longitude, "title":i.title, "user": Auth.auth().currentUser?.displayName!, "detailMemo": self.detailMemo, "status":false, "area": area] as [String : Any]
             let user = Auth.auth().currentUser
             if user != nil {
-                self.place.addDocument(data: data) { (error) in
+                self.place.document(String(i.latitude)).setData(data) { (error) in
+                    //self.place.addDocument(data: data) { (error) in
                     if error != nil {
                         print("保存失敗です")
                     } else {
@@ -275,6 +356,10 @@ extension ViewController: GMSMapViewDelegate {
                             self.place.getDocuments { (querySnapshot, error) in
                                 self.visitedNumber = (querySnapshot?.documents.count)!
                                 self.countVisitedLabel.text = String(self.visitedNumber)
+                                
+                                //国ごとにマーカーの色を変える
+                                //querySnapshot?.documents.area
+                                //switch caseとかで書く
                             }
                             alertController.dismiss(animated: true, completion: nil)
                         })
@@ -286,19 +371,12 @@ extension ViewController: GMSMapViewDelegate {
         }
     }
     
-    //ピンをお気に入り登録する時の関数
-//    func updatePins() {
-//        self.db = Firestore.firestore()
-//        self.place = db.collection("place")
-//        for i in pins {
-//            let data = ["latitude":i.latitude,"longitude":i.longitude,"title":i.title,"user": Auth.auth().currentUser?.displayName, "status":true] as [String : Any]
-//            let user = Auth.auth().currentUser
-//            if user != nil {
-//                self.place.collectionID.
-//            }
-//        }
-//    }
-    
+    //ピンを保存するときにエリアの情報も一緒に保存する
+    //    func areaCalculate(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> String {
+    //
+    //        //国名を返す
+    //        return
+    //    }
     
 }
 
@@ -313,10 +391,10 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
         
         //検索場所にマーカーを打つ
-        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!)
+        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!, detailMemo: "")
         
         //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
-        let pin = Pin(latitude: latitude, longitude: longitude, title: place.name!, status: false)
+        let pin = Pin(latitude: latitude, longitude: longitude, title: place.name!, user: (Auth.auth().currentUser?.displayName)!, detailMemo: "", status: false, area: area)
         self.pins.append(pin)
         
         dismiss(animated: true, completion: nil)
@@ -345,7 +423,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
     func makeSearchButton() {
         let button = UIButton()
         let screenwidth = Float(UIScreen.main.bounds.size.width)
-        button.frame = CGRect(x: 15, y: 15, width: 45, height: 45)
+        button.frame = CGRect(x: 15, y: 55, width: 45, height: 45)
         button.backgroundColor = UIColor.white
         //UIColor(red: 226/255, green: 224/255, blue: 212/255, alpha: 1.0)
         button.setImage(UIImage(named: "search@2x.png"), for: .normal)

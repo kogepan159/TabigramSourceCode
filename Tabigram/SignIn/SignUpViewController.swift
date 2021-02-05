@@ -32,6 +32,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func mailSignUp() {
         if passwordTextField.text == confirmTextField.text {
             Auth.auth().createUser(withEmail: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "") { (user, error) in
@@ -40,6 +44,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     let user = Auth.auth().currentUser
                     if let user = user {
+                        //firestoreにデータを入れる
+                        //user.u
+                        
                         let changeRequest = user.createProfileChangeRequest()
                         changeRequest.displayName = self.nameTextField.text
                         print(Auth.auth().currentUser?.displayName)
