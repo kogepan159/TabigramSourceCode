@@ -17,8 +17,9 @@ class Pin: NSObject {
     var detailMemo: String
     var status: Bool
     var area: String
+    var color: String
     
-    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String, user: String, detailMemo: String, status: Bool, area: String) {
+    init(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String, user: String, detailMemo: String, status: Bool, area: String, color: String) {
         self.latitude = latitude
         self.longitude = longitude
         self.title = title
@@ -26,6 +27,7 @@ class Pin: NSObject {
         self.detailMemo = detailMemo
         self.status = status
         self.area = area
+        self.color = color
     }
     
 }

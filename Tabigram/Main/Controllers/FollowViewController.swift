@@ -6,15 +6,24 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var followTableView: UITableView!
     
+    //Cloud FireStore用
+    var db: Firestore!
+    var user: CollectionReference!
+    var users = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
         backButton()
         makeProfileButton()
         
@@ -25,12 +34,17 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         followTableView.register(UINib(nibName: "FollowCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "FollowCustomTableViewCell")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadUsers()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -41,8 +55,11 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FollowCustomTableViewCell") as? FollowCustomTableViewCell {
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.height / 2
             cell.userImageView.layer.masksToBounds = true
+            cell.userNameLabel.text = self.users[indexPath.row].userName
+            cell.detailLabel.text = self.users[indexPath.row].text
             return cell
         }
+        
         return UITableViewCell()
     }
     
@@ -50,10 +67,10 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    
     //戻るボタン
     func backButton() {
         let button = UIButton()
-        let screenwidth = Float(UIScreen.main.bounds.size.width)
         button.frame = CGRect(x: 15, y: 55, width: 45, height: 45)
         button.backgroundColor = UIColor.white
         button.setImage(UIImage(named: "back@2x.png"), for: .normal)
@@ -88,4 +105,27 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.performSegue(withIdentifier: "Profile", sender: nil)
     }
     
+    func loadUsers() {
+        //self.users.removeAll()
+        self.db = Firestore.firestore()
+        self.user = db.collection("user")
+        self.user.getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print("何らかの理由で読み取りできませんでした。")
+            } else {
+                for val in querySnapshot!.documents {
+                    let userName = val.get("userName") as! String
+                    let email = val.get("email") as! String
+                    let image = val.get("image") as! String
+                    let visitedNumber = val.get("visitedNumber") as! String
+                    let favoriteNumber = val.get("favoriteNumber") as! String
+                    let text = val.get("text") as! String
+                    let userArray = User(userName: userName, email: email, image: image, visitedNumber: visitedNumber, favoriteNumber: favoriteNumber, text: text)
+                    self.users.append(userArray)
+                    
+                }
+                print("ユーザ一覧取得完了")
+            }
+        }
+    }
 }

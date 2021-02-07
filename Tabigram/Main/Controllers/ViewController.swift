@@ -44,6 +44,10 @@ class ViewController: UIViewController {
     var detailMemo = ""
     var area = "Japan"
     
+    //カスタムView用
+//    var tappedMarker : GMSMarker?
+//    var customInfoView : CustomInfoView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,14 +90,14 @@ class ViewController: UIViewController {
         mySegment.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "HiraKakuProN-W6", size: 12.0)!,
             NSAttributedString.Key.foregroundColor: UIColor.white
-            ], for: .selected)
+        ], for: .selected)
         // セグメントのフォントと文字色の設定
         mySegment.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "HiraKakuProN-W3", size: 12.0)!,
             NSAttributedString.Key.foregroundColor: UIColor(red: 0.30, green: 0.49, blue: 0.62, alpha: 1.0)
-            ], for: .normal)
+        ], for: .normal)
         // セグメントの選択
-        mySegment.selectedSegmentIndex = 0
+        mySegment.selectedSegmentIndex = 1
         // セグメントが変更された時に呼び出すメソッドの設定
         mySegment.addTarget(self, action: #selector(segmentChanged(_:)), for: UIControl.Event.valueChanged)
         // UISegmentedControlを追加
@@ -140,9 +144,11 @@ class ViewController: UIViewController {
     @objc func segmentChanged(_ segment:UISegmentedControl) {
         switch segment.selectedSegmentIndex {
         case 0:
-            print("左を選択した。")
+            //オープンモード
+            self.loadOpenLocations()
         case 1:
-            print("中央を選択した。")
+            //プライベートモード
+            self.loadLocations()
         default:
             break
         }
@@ -182,7 +188,6 @@ class ViewController: UIViewController {
                     print("何らかの理由で読み取りできませんでした。")
                 } else {
                     if querySnapshot!.documents.count != 0 {
-                        print("loadできています")
                         for val in querySnapshot!.documents {
                             let longitude = val.get("longitude") as! CLLocationDegrees
                             let latitude = val.get("latitude") as! CLLocationDegrees
@@ -192,15 +197,35 @@ class ViewController: UIViewController {
                             let status = val.get("status") as! Bool
                             let area = val.get("area") as! String
                             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                            self.showMaker(position: location, title: name, detailMemo: memo, status: status)
+                            let colorRef = val.get("color") as! String
+                            let color: UIColor!
+                            if colorRef == "Red" {
+                                color = UIColor.red
+                            } else if colorRef == "Brown" {
+                                color = UIColor.brown
+                            } else if colorRef == "Blue" {
+                                color = UIColor.blue
+                            } else if colorRef == "Orange" {
+                                color = UIColor.orange
+                            } else if colorRef == "Black" {
+                                color = UIColor.black
+                            } else if colorRef == "White" {
+                                color = UIColor.white
+                            } else if colorRef == "Green" {
+                                color = UIColor.green
+                            } else if colorRef == "Yellow" {
+                                color = UIColor.yellow
+                            } else {
+                                color = UIColor.black
+                            }
+                            self.showMaker(position: location, title: name, detailMemo: memo, status: status, color: color)
                             self.visitedNumber = (querySnapshot?.documents.count)!
-                            let pin = Pin(latitude: latitude, longitude: longitude, title: name, user: user, detailMemo: memo, status: status, area: area)
+                            let pin = Pin(latitude: latitude, longitude: longitude, title: name, user: user, detailMemo: memo, status: status, area: area, color: colorRef)
                             self.pins.append(pin)
                             if status == true {
                                 self.favoriteNumber += 1
                             }
                         }
-                        print(self.pins.count)
                         self.countVisitedLabel.text = String(self.visitedNumber)
                         self.countFavoritedLabel.text = String(self.favoriteNumber)
                     } else {
@@ -211,22 +236,84 @@ class ViewController: UIViewController {
         }
     }
     
+    //OpenModeの時に呼ばれるload用関数
+    func loadOpenLocations() {
+        //一旦リセット
+        self.visitedNumber = 0
+        self.favoriteNumber = 0
+        self.pins.removeAll()
+        
+        self.db = Firestore.firestore()
+        db.collectionGroup("place").getDocuments { (querySnapshot, error) in
+            if error != nil {
+                print("何らかの理由で読み取りできませんでした。")
+            } else {
+                if querySnapshot!.documents.count != 0 {
+                    for val in querySnapshot!.documents {
+                        let longitude = val.get("longitude") as! CLLocationDegrees
+                        let latitude = val.get("latitude") as! CLLocationDegrees
+                        let name = val.get("title") as! String
+                        let memo = val.get("detailMemo") as! String
+                        let user = val.get("user") as! String
+                        let status = val.get("status") as! Bool
+                        let area = val.get("area") as! String
+                        let colorRef = val.get("color") as! String
+                        let color: UIColor!
+                        if colorRef == "Red" {
+                            color = UIColor.red
+                        } else if colorRef == "Brown" {
+                            color = UIColor.brown
+                        } else if colorRef == "Blue" {
+                            color = UIColor.blue
+                        } else if colorRef == "Orange" {
+                            color = UIColor.orange
+                        } else if colorRef == "Black" {
+                            color = UIColor.black
+                        } else if colorRef == "White" {
+                            color = UIColor.white
+                        } else if colorRef == "Green" {
+                            color = UIColor.green
+                        } else if colorRef == "Yellow" {
+                            color = UIColor.yellow
+                        } else {
+                            color = UIColor.black
+                        }
+                        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                        self.showMaker(position: location, title: name, detailMemo: memo, status: status, color: color)
+                        self.visitedNumber = (querySnapshot?.documents.count)!
+                        let pin = Pin(latitude: latitude, longitude: longitude, title: name, user: user, detailMemo: memo, status: status, area: area, color: colorRef)
+                        self.pins.append(pin)
+                        if status == true {
+                            self.favoriteNumber += 1
+                        }
+                    }
+                    self.countVisitedLabel.text = String(self.visitedNumber)
+                    self.countFavoritedLabel.text = String(self.favoriteNumber)
+                } else {
+                    print("データがひとつもないです。。")
+                }
+            }
+        }
+        
+    }
+    
 }
 
 extension ViewController: GMSMapViewDelegate {
     
     //マーカーを打ち込む
-    func showMaker(position: CLLocationCoordinate2D, title: String, detailMemo: String, status: Bool) {
+    func showMaker(position: CLLocationCoordinate2D, title: String, detailMemo: String, status: Bool, color: UIColor) {
         let marker = GMSMarker()
         marker.position = position
         marker.title = title
         marker.snippet = detailMemo
-        if status == true {
+        
+        if status == true && color == UIColor.brown {
             if marker.title?.count != 0 {
                 marker.appearAnimation = GMSMarkerAnimation.pop
                 //マーカーをmapviewに表示
                 marker.map = self.mapView
-                marker.icon = GMSMarker.markerImage(with: UIColor.green)
+                //marker.icon = GMSMarker.markerImage(with: UIColor.green)
                 
                 //オリジナルのマーカーアイコンを作成
                 let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
@@ -239,7 +326,115 @@ extension ViewController: GMSMapViewDelegate {
                 markerView.backgroundColor = .brown
                 markerView.addSubview(label)
                 marker.iconView = markerView
-                print("お気に入りのマーカーを打ち込みました")
+            }
+        } else if status == true && color == UIColor.blue {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .white
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .blue
+                markerView.addSubview(label)
+                marker.iconView = markerView
+
+            }
+        } else if status == true && color == UIColor.orange {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .white
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .orange
+                markerView.addSubview(label)
+                marker.iconView = markerView
+            }
+        } else if status == true && color == UIColor.black {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .white
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .black
+                markerView.addSubview(label)
+                marker.iconView = markerView
+            }
+        } else if status == true && color == UIColor.white {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .gray
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .white
+                markerView.addSubview(label)
+                marker.iconView = markerView
+            }
+        } else if status == true && color == UIColor.green {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .gray
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .green
+                markerView.addSubview(label)
+                marker.iconView = markerView
+            }
+        } else if status == true && color == UIColor.yellow {
+            if marker.title?.count != 0 {
+                marker.appearAnimation = GMSMarkerAnimation.pop
+                //マーカーをmapviewに表示
+                marker.map = self.mapView
+                
+                //オリジナルのマーカーアイコンを作成
+                let label = UILabel(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                label.text = "♡"
+                label.font = UIFont.systemFont(ofSize: 30.0)
+                label.textAlignment = .center
+                label.textColor = .gray
+                let markerView = UIView(frame: CGRect(x:0.0, y:0.0, width:40.0, height:40.0))
+                markerView.layer.cornerRadius = 20.0
+                markerView.backgroundColor = .yellow
+                markerView.addSubview(label)
+                marker.iconView = markerView
             }
         } else {
             if marker.title?.count != 0 {
@@ -247,8 +442,7 @@ extension ViewController: GMSMapViewDelegate {
                 //マーカーをmapviewに表示
                 marker.map = self.mapView
                 marker.icon = GMSMarker.markerImage(with: UIColor.red)
-                //marker.icon = UIImage(named: "marker_icon_mikan.png")
-                print("普通のマーカーを打ち込みました")
+
                 
             }
         }
@@ -273,9 +467,9 @@ extension ViewController: GMSMapViewDelegate {
             print(self.titleText)
             print(self.detailMemo)
             //マーカーを生成する（タイトルをつけた時のみ）
-            self.showMaker(position: coordinate, title: self.titleText, detailMemo: self.detailMemo, status: false)
+            self.showMaker(position: coordinate, title: self.titleText, detailMemo: self.detailMemo, status: false , color: UIColor.red)
             //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
-            let pin = Pin(latitude: coordinate.latitude, longitude: coordinate.longitude, title: self.titleText, user: (Auth.auth().currentUser?.displayName)!, detailMemo: self.detailMemo, status: false, area: self.area)
+            let pin = Pin(latitude: coordinate.latitude, longitude: coordinate.longitude, title: self.titleText, user: (Auth.auth().currentUser?.displayName)!, detailMemo: self.detailMemo, status: false, area: self.area, color: "red")
             self.pins.append(pin)
             self.savePins()
             alert.dismiss(animated: true, completion: nil)
@@ -295,30 +489,170 @@ extension ViewController: GMSMapViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //マーカーをタップした時に呼ばれる関数
+//    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+//        tappedMarker = marker
+//        customInfoView?.layer.cornerRadius = 8
+//        customInfoView?.center = mapView.projection.point(for: marker.position)
+//        self.mapView.addSubview(customInfoView!)
+//        return false
+//    }
+//
+//    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+//        return UIView()
+//    }
+//    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+//        customInfoView?.removeFromSuperview()
+//    }
+//    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+//        let position = tappedMarker?.position
+//        customInfoView?.center = mapView.projection.point(for: position!)
+//        customInfoView?.center.y -= 140
+//    }
+    
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            for pin in self.pins {
-                if marker.position.latitude == pin.latitude {
-                    self.countFavoritedLabel.text = String(self.favoriteNumber)
-                    self.db = Firestore.firestore()
-                    self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
-                    self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["status": true]) { err in
-                        if let err = err {
-                        } else {
-                            self.loadLocations()
+        if marker.icon == GMSMarker.markerImage(with: UIColor.red) {
+            let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["status": true]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
                         }
                     }
                 }
+                alertController.dismiss(animated: true, completion: nil)
+            })
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (action) in
+                alertController.dismiss(animated: true, completion: nil)
             }
-            alertController.dismiss(animated: true, completion: nil)
-        })
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .default) { (action) in
-            alertController.dismiss(animated: true, completion: nil)
+            alertController.addAction(cancelAction)
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            let actionSheet: UIAlertController = UIAlertController(title: "選択肢を表示", message: "好きなピンを選択してください", preferredStyle: UIAlertController.Style.actionSheet)
+            actionSheet.addAction(UIAlertAction(title: "Brown", style: .default,handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Brown"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "Blue", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Blue"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "Orange", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Orange"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "Black", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Black"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "White", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "White"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "Green", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Green"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.addAction(UIAlertAction(title: "Yellow", style: .default, handler: {(action: UIAlertAction!) -> Void in
+                for pin in self.pins {
+                    if marker.position.latitude == pin.latitude {
+                        self.countFavoritedLabel.text = String(self.favoriteNumber)
+                        self.db = Firestore.firestore()
+                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Yellow"]) { err in
+                            if let err = err {
+                            } else {
+                                self.loadLocations()
+                            }
+                        }
+                    }
+                }
+            })
+            )
+            actionSheet.popoverPresentationController?.sourceView = self.mapView
+            self.present(actionSheet, animated: true, completion: nil)
+
         }
-        alertController.addAction(cancelAction)
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
     }
     
     //マーカーのウィンドウを長押した時の処理
@@ -338,6 +672,7 @@ extension ViewController: GMSMapViewDelegate {
                     marker.map = nil
                     let index = self.pins.index(of: pin)
                     self.pins.remove(at: index!)
+                    print("削除成功")
                 }
             }
         })
@@ -456,10 +791,10 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
         mapView.camera = camera
         
         //検索場所にマーカーを打つ
-        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!, detailMemo: "", status: false)
+        showMaker(position: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: place.name!, detailMemo: "", status: false, color: UIColor.red)
         
         //生成したpinを配列で保存する→保存ボタンでまとめてFirebaseで保存
-        let pin = Pin(latitude: latitude, longitude: longitude, title: place.name!, user: (Auth.auth().currentUser?.displayName)!, detailMemo: "", status: false, area: area)
+        let pin = Pin(latitude: latitude, longitude: longitude, title: place.name!, user: (Auth.auth().currentUser?.displayName)!, detailMemo: "", status: false, area: area, color: "red")
         self.pins.append(pin)
         
         dismiss(animated: true, completion: nil)

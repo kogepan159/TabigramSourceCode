@@ -60,6 +60,9 @@
 		EF80760125CBC3C600BDA7E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */; };
 		EF80762725CBCD9C00BDA7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */; };
 		EFB26D2425CD885B00607DD0 /* marker_icon_mikan.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB26D2325CD885B00607DD0 /* marker_icon_mikan.png */; };
+		EFB26D5025CE48B900607DD0 /* CustomInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB26D4F25CE48B900607DD0 /* CustomInfoView.swift */; };
+		EFB26D5725CE48FA00607DD0 /* CustomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFB26D5625CE48FA00607DD0 /* CustomInfoView.xib */; };
+		EFB26D5A25CE4BF000607DD0 /* sp-setofont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFB26D5925CE4BF000607DD0 /* sp-setofont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +123,9 @@
 		EF80760025CBC3C600BDA7E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		EF80762625CBCD9C00BDA7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EFB26D2325CD885B00607DD0 /* marker_icon_mikan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker_icon_mikan.png; sourceTree = "<group>"; };
+		EFB26D4F25CE48B900607DD0 /* CustomInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoView.swift; sourceTree = "<group>"; };
+		EFB26D5625CE48FA00607DD0 /* CustomInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInfoView.xib; sourceTree = "<group>"; };
+		EFB26D5925CE4BF000607DD0 /* sp-setofont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sp-setofont.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +220,7 @@
 		EF80759625CBC06B00BDA7E9 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				EFB26D5925CE4BF000607DD0 /* sp-setofont.ttf */,
 				EF80759925CBC06B00BDA7E9 /* Billabong.ttf */,
 				EF80759825CBC06B00BDA7E9 /* sarial.ttf */,
 				EF80759A25CBC06B00BDA7E9 /* Atletico-RegularDemo.otf */,
@@ -293,6 +300,8 @@
 			children = (
 				EF3F08D425CD433800FDF566 /* FollowCustomTableViewCell.swift */,
 				EF3F08D525CD433800FDF566 /* FollowCustomTableViewCell.xib */,
+				EFB26D4F25CE48B900607DD0 /* CustomInfoView.swift */,
+				EFB26D5625CE48FA00607DD0 /* CustomInfoView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -371,6 +380,7 @@
 			files = (
 				EF8075B125CBC06B00BDA7E9 /* search@2x.png in Resources */,
 				EF80758525CBBFCD00BDA7E9 /* LaunchScreen.storyboard in Resources */,
+				EFB26D5725CE48FA00607DD0 /* CustomInfoView.xib in Resources */,
 				EF8075BC25CBC06B00BDA7E9 /* Icon-App-76x76@2x.png in Resources */,
 				EF3F08A725CCDAA300FDF566 /* back@2x.png in Resources */,
 				EF8075C125CBC06B00BDA7E9 /* Icon-App-20x20@3x.png in Resources */,
@@ -385,6 +395,7 @@
 				EF8075C025CBC06B00BDA7E9 /* Icon-App-83.5x83.5@2x.png in Resources */,
 				EF8075BF25CBC06B00BDA7E9 /* Icon-App-20x20@1x.png in Resources */,
 				EF8075BE25CBC06B00BDA7E9 /* Icon-App-40x40@1x.png in Resources */,
+				EFB26D5A25CE4BF000607DD0 /* sp-setofont.ttf in Resources */,
 				EF8075B925CBC06B00BDA7E9 /* Billabong.ttf in Resources */,
 				EF8075CE25CBC06B00BDA7E9 /* worldMap.jpg in Resources */,
 				EF8075B325CBC06B00BDA7E9 /* profile@2x.png in Resources */,
@@ -486,6 +497,7 @@
 				EF8075EA25CBC27900BDA7E9 /* PlaceHolderTextView.swift in Sources */,
 				EF8075DB25CBC10700BDA7E9 /* SignUpViewController.swift in Sources */,
 				EF3F08D625CD433800FDF566 /* FollowCustomTableViewCell.swift in Sources */,
+				EFB26D5025CE48B900607DD0 /* CustomInfoView.swift in Sources */,
 				EF8075FD25CBC3A800BDA7E9 /* ProfileViewController.swift in Sources */,
 				EF3F08D225CD425400FDF566 /* FollowViewController.swift in Sources */,
 				EF8075D825CBC0C000BDA7E9 /* SignInViewController.swift in Sources */,
