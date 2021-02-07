@@ -9,6 +9,10 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
+import SDWebImage
+import Photos
+import NVActivityIndicatorView
 
 class EditProfileViewController: UIViewController {
     
@@ -21,14 +25,20 @@ class EditProfileViewController: UIViewController {
     @IBOutlet var favoriteNumberLabel: UILabel!
     
     //画像用
-    var image = ""
+    private var imageUrl: String = ""
     
     //Cloud FireStore用
-    var db: Firestore!
-    var user: CollectionReference!
+    var db: Firestore = Firestore.firestore()
     
-    var users = [User]()
+    var user = User(userName: "", email: "", image: "", visitedNumber: "", favoriteNumber: "", text: "")
     
+    private let storage = Storage.storage().reference()
+    private var riversRef: StorageReference = StorageReference()
+    private let meta = StorageMetadata()
+    private var activityIndicatorView: NVActivityIndicatorView! //Load用
+    
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,74 +48,86 @@ class EditProfileViewController: UIViewController {
         profileImageView.layer.cornerRadius = profileImageView.bounds.width / 2
         profileImageView.layer.masksToBounds = true
         
-        loadUsers()
+        // Loadマーク対応
+        activityIndicatorView = self.getActivityIndicatorView()
+        self.view.addSubview(activityIndicatorView)
         
+        self.db = Firestore.firestore()
+        
+        loadUsers()
         backButton()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    // MARA: - Private
+    private func showPickerView() {
+        // 写真を選ぶビュー
+        // メインスレッド対応
+        DispatchQueue.main.async {
+            let pickerView = UIImagePickerController()
+            pickerView.sourceType = .savedPhotosAlbum
+            pickerView.delegate = self
+            self.present(pickerView, animated: true)
+        }
     }
     
-    @IBAction func changeImageButton() {
-        
+    private func showAccessSettingAlert() {
+        // フォトライブラリへのアクセスが許可されていないため、アラートを表示する
+        let alert = UIAlertController(title: "アクセスが許可されていません。", message: "フォトライブラリへのアクセスが許可されていません。端末のアプリ設定を開いて、変更する場合は設定を押下してください。", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "設定", style: .default, handler: { (_) -> Void in
+            guard let settingsURL = URL(string: UIApplication.openSettingsURLString ) else {
+                return
+            }
+            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+        })
+        let closeAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(settingsAction)
+        alert.addAction(closeAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func saveProfileButton() {
-        self.db = Firestore.firestore()
-        self.user = db.collection("user")
-        let data = ["userName": self.nameLabel.text, "email": self.emailLabel.text, "image": image, "visitedNumber": self.visitedNumberLabel.text, "favoriteNumber": self.favoriteNumberLabel.text, "text": self.profileTextView.text] as [String : Any]
-        let user = Auth.auth().currentUser
-        if user != nil {
-            self.user.document(Auth.auth().currentUser?.uid ?? "").setData(data) { (error) in
-                if error != nil {
-                    print("保存失敗です")
-                } else {
-                    let alertController = UIAlertController(title: "保存成功", message: "保存が成功しました", preferredStyle: .alert)
-                    let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                        alertController.dismiss(animated: true, completion: nil)
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alertController.addAction(action)
-                    self.present(alertController, animated: true, completion: nil)
-                }
+    private func userUpdateDate() {
+       
+        guard let user = Auth.auth().currentUser else { return }
+        activityIndicatorView.startAnimating()
+        db.collection("user").document(user.uid).updateData(["image": imageUrl, "text": self.profileTextView.text ?? ""]) { (error) in
+            self.activityIndicatorView.stopAnimating()
+            if error != nil {
+                print("保存失敗です")
+            } else {
+                self.okAlert(title: "保存成功", message: "保存が成功しました")
             }
         }
     }
     
     //ユーザ情報を読み込む
-    func loadUsers() {
-        self.db = Firestore.firestore()
-        self.user = db.collection("user")
-        self.user.whereField("userName", isEqualTo: Auth.auth().currentUser?.displayName)
-        self.user.getDocuments { (querySnapshot, error) in
+    private func loadUsers() {
+        guard let user = Auth.auth().currentUser else { return }
+        activityIndicatorView.startAnimating()
+        db.collection("user").document(user.uid).getDocument { (document, error) in
+            self.activityIndicatorView.stopAnimating()
             if error != nil {
                 print("何らかの理由で読み取りできませんでした。")
             } else {
-                for val in querySnapshot!.documents {
-                    let userName = val.get("userName") as! String
-                    let email = val.get("email") as! String
-                    let image = val.get("image") as! String
-                    let visitedNumber = val.get("visitedNumber") as! String
-                    let favoriteNumber = val.get("favoriteNumber") as! String
-                    let text = val.get("text") as! String
-                    let userArray = User(userName: userName, email: email, image: image, visitedNumber: visitedNumber, favoriteNumber: favoriteNumber, text: text)
-                    self.users.append(userArray)
-                    self.nameLabel.text = userName
-                    self.emailLabel.text = email
-                    self.visitedNumberLabel.text = String(visitedNumber)
-                    self.favoriteNumberLabel.text = String(favoriteNumber)
-                    self.profileTextView.text = text
+                guard let document = document?.data() else {
+                    self.okAlert(title: "データ存在しません。", message: "再度ログインし直してみてください")
+                    return
                 }
+                self.user.setDocument(document: document)
+                self.nameLabel.text = self.user.userName
+                self.emailLabel.text = self.user.email
+                self.visitedNumberLabel.text = self.user.visitedNumber
+                self.favoriteNumberLabel.text = self.user.favoriteNumber
+                self.profileTextView.text = self.user.text
+                self.imageUrl = self.user.image
+                self.profileImageView.sd_setImage(with: URL(string: self.user.image), completed: nil)
             }
         }
         
     }
     
     //戻るボタン
-    func backButton() {
+    private func backButton() {
         let button = UIButton()
-        let screenwidth = Float(UIScreen.main.bounds.size.width)
         button.frame = CGRect(x: 15, y: 55, width: 45, height: 45)
         button.backgroundColor = UIColor.white
         button.setImage(UIImage(named: "back@2x.png"), for: .normal)
@@ -116,9 +138,79 @@ class EditProfileViewController: UIViewController {
         button.addTarget(self, action: #selector(ProfileViewController.toBackButton(_:)), for: UIControl.Event.touchUpInside)
     }
     
+    // MARA: - IBAction
+    @IBAction func changeImageButton() {
+        // 読み込み機能のみ許可
+        switch (PHPhotoLibrary.authorizationStatus(for: .addOnly)) {
+        case .notDetermined: // フォトライブラリへのアクセスについてユーザーから明示的な回答を得ていない。
+            PHPhotoLibrary.requestAuthorization(for: .addOnly, handler: { status in
+                switch status {
+                case .authorized:
+                    self.showPickerView()
+                    break
+                default:
+                    break
+                }
+            })
+            break
+        case .authorized, .limited: // フォトライブラリへのアクセスについてユーザーが明示的に「許可」をした。
+            self.showPickerView()
+            break
+        default:
+            self.showAccessSettingAlert()
+            break
+        }
+        
+    }
+    
+    @IBAction func saveProfileButton() {
+        userUpdateDate()
+    }
+    
     // 戻るボタンが押された時に呼ばれるメソッド（保存する）
     @objc func toBackButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // 写真を選んだ後に呼ばれる処理
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+       
+        // ログイン情報確認
+        guard let uid = Auth.auth().currentUser?.uid else {
+            self.okAlert(title: "ログイン情報がありません", message: "もう一度ログインし直してください")
+            return
+        }
+        
+        // 選択した写真を取得する
+        guard let image = info[.originalImage] as? UIImage else  { return }
+        guard let resizeImage = image.resized(toWidth: 400) else  { return }
+        riversRef = storage.child( "user/" + uid + ".png")
+        
+        
+        guard let imagaData = resizeImage.pngData() else  { return }
+        activityIndicatorView.startAnimating()
+        let _ = riversRef.putData(imagaData, metadata: meta) { metadata, error in
+            self.activityIndicatorView.stopAnimating()
+          guard let _ = metadata else {
+            self.okAlert(title: "画像のアップロードに失敗しました", message: "再度設定していただくか、別の画像でお試しください。")
+            return
+          }
+          // You can also access to download URL after upload.
+        self.riversRef.downloadURL { (url, error) in
+            guard let downloadURL = url else {
+                self.okAlert(title: "画像のアップロードに失敗しました", message: "再度設定していただくか、別の画像でお試しください。")
+                return
+            }
+            self.profileImageView.image = image
+            self.imageUrl = downloadURL.absoluteString
+            self.userUpdateDate()
+          }
+        }
+
+        // 写真を選ぶビューを引っ込める
+        self.dismiss(animated: true)
+    }
 }

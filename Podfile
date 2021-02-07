@@ -13,5 +13,8 @@ pod 'Firebase/Firestore'
 pod 'Firebase/Core'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'Firebase/Storage'
+pod 'SDWebImage', '~> 5.0'
+pod 'NVActivityIndicatorView'
 
 end

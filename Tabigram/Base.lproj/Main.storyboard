@@ -26,10 +26,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk9-3X-EMG">
-                                <rect key="frame" x="57" y="687" width="301" height="76"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zk9-3X-EMG">
+                                <rect key="frame" x="56.5" y="672" width="301" height="75"/>
                                 <color key="backgroundColor" red="0.99607843137254903" green="0.92941176470588238" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="301" id="rNp-sy-xkY"/>
+                                    <constraint firstAttribute="height" constant="75" id="ync-rZ-yGM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="28"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,9 +41,12 @@
                                     <segue destination="4Kx-BD-N7V" kind="presentation" modalPresentationStyle="fullScreen" id="nQv-Uk-T7j"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJt-qn-0sr">
-                                <rect key="frame" x="57" y="780" width="301" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJt-qn-0sr">
+                                <rect key="frame" x="56.5" y="777" width="301" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="a4M-5s-eFG"/>
+                                    <constraint firstAttribute="width" constant="301" id="iBE-yd-eZF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="19"/>
                                 <state key="normal" title="Log Out"/>
                                 <connections>
@@ -50,6 +56,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Ki-X8-Och"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NJt-qn-0sr" firstAttribute="centerX" secondItem="Ni8-fY-GNG" secondAttribute="centerX" id="LCi-fz-6ED"/>
+                            <constraint firstItem="zk9-3X-EMG" firstAttribute="centerX" secondItem="Ni8-fY-GNG" secondAttribute="centerX" id="XRm-NG-tBL"/>
+                            <constraint firstItem="3Ki-X8-Och" firstAttribute="bottom" secondItem="NJt-qn-0sr" secondAttribute="bottom" constant="35" id="Xf1-zw-VuZ"/>
+                            <constraint firstItem="NJt-qn-0sr" firstAttribute="top" secondItem="zk9-3X-EMG" secondAttribute="bottom" constant="30" id="fYS-8U-89T"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="logOutButton" destination="NJt-qn-0sr" id="zx9-Oe-7fN"/>
