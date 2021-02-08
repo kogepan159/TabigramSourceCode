@@ -76,7 +76,9 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         followTableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        <#code#>
+    }
     //戻るボタン
     func backButton() {
         let button = UIButton()
