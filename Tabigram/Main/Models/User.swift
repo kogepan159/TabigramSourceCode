@@ -25,4 +25,25 @@ class User: NSObject {
         self.text = text
     }
     
+    func setDocument(document: [String: Any]) {
+        if let userName = document["userName"] as? String {
+            self.userName = userName
+        }
+        if let email = document["email"]as? String {
+            self.email = email
+        }
+        if let image = document["image"]as? String {
+            self.image =  image
+        }
+        if let visitedNumber = document["visitedNumber"] as? String {
+            self.visitedNumber = visitedNumber
+        }
+        if let favoriteNumber = document["favoriteNumber"] as? String {
+            self.favoriteNumber = favoriteNumber
+        }
+        if let text = document["text"] as? String {
+            self.text = text
+        }
+    }
+    
 }
