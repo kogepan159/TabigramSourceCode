@@ -511,21 +511,26 @@ extension ViewController: GMSMapViewDelegate {
 //    }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        //マーカーが赤色だったら
-        if marker.icon == GMSMarker.markerImage(with: UIColor.red) {
+       // 共通部分
+        var setPin: Pin? = nil
+        for pin in self.pins {
+            if marker.position.latitude == pin.latitude && marker.position.longitude == pin.longitude {
+                setPin = pin
+            }
+        }
+        guard let tapPin = setPin else { return }
+        self.countFavoritedLabel.text = String(self.favoriteNumber)
+        self.db = Firestore.firestore()
+        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
+    
+        // 判定処理
+        if !tapPin.status {
             let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                for pin in self.pins {
-                    if marker.position.latitude == pin.latitude {
-                        self.countFavoritedLabel.text = String(self.favoriteNumber)
-                        self.db = Firestore.firestore()
-                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
-                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["status": true]) { err in
-                            if let err = err {
-                            } else {
-                                self.loadLocations()
-                            }
-                        }
+                self.place.document(String(tapPin.latitude) + String(tapPin.longitude)).updateData(["status": true]) { err in
+                    if let err = err {
+                    } else {
+                        self.loadLocations()
                     }
                 }
                 alertController.dismiss(animated: true, completion: nil)
@@ -539,17 +544,10 @@ extension ViewController: GMSMapViewDelegate {
         } else {
             let actionSheet: UIAlertController = UIAlertController(title: "選択肢を表示", message: "好きなピンを選択してください", preferredStyle: UIAlertController.Style.actionSheet)
             actionSheet.addAction(UIAlertAction(title: "Brown", style: .default,handler: {(action: UIAlertAction!) -> Void in
-                for pin in self.pins {
-                    if marker.position.latitude == pin.latitude {
-                        self.countFavoritedLabel.text = String(self.favoriteNumber)
-                        self.db = Firestore.firestore()
-                        self.place = self.db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
-                        self.place.document(String(pin.latitude) + String(pin.longitude)).updateData(["color": "Brown"]) { err in
-                            if let err = err {
-                            } else {
-                                self.loadLocations()
-                            }
-                        }
+                self.place.document(String(tapPin.latitude) + String(tapPin.longitude)).updateData(["color": "Brown"]) { err in
+                    if let err = err {
+                    } else {
+                        self.loadLocations()
                     }
                 }
             })
