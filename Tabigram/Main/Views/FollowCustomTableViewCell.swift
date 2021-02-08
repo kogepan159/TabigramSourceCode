@@ -12,6 +12,7 @@ class FollowCustomTableViewCell: UITableViewCell {
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
+    @IBOutlet var followButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +25,7 @@ class FollowCustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func followButton() {
+    @IBAction func follow() {
         
     }
     

@@ -511,6 +511,7 @@ extension ViewController: GMSMapViewDelegate {
 //    }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        //マーカーが赤色だったら
         if marker.icon == GMSMarker.markerImage(with: UIColor.red) {
             let alertController = UIAlertController(title: "お気に入りの場所に登録しますか？", message: "お気に入りの国を世界中に作ろう！", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -740,7 +741,7 @@ extension ViewController: GMSMapViewDelegate {
         self.place = db.collection("user").document(Auth.auth().currentUser!.uid).collection("place")
         for i in pins {
             //self.area = self.areaCalculate(latitude: i.latitude, longitude: i.longitude)
-            let data = ["latitude":i.latitude, "longitude":i.longitude, "title":i.title, "user": Auth.auth().currentUser?.displayName!, "detailMemo": self.detailMemo, "status":false, "area": area] as [String : Any]
+            let data = ["latitude":i.latitude, "longitude":i.longitude, "title":i.title, "user": Auth.auth().currentUser?.displayName!, "detailMemo": self.detailMemo, "status":false, "area": area, "color": "Red"] as [String : Any]
             let user = Auth.auth().currentUser
             if user != nil {
                 self.place.document(String(i.latitude) + String(i.longitude)).setData(data) { (error) in

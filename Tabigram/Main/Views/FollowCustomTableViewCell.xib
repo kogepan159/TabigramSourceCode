@@ -26,25 +26,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PEOPLE TO FOLLOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0c-z3-shm">
-                        <rect key="frame" x="96" y="15" width="209" height="32"/>
+                        <rect key="frame" x="96" y="15" width="217" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="16"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PEOPLE TO FOLLOW" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSX-Ak-opr">
-                        <rect key="frame" x="96" y="51" width="209" height="24"/>
+                        <rect key="frame" x="96" y="51" width="217" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="7"/>
+                        <fontDescription key="fontDescription" name="sarial" family="sarial" pointSize="10"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XY9-AB-cHI" customClass="CustomButton" customModule="Tabigram" customModuleProvider="target">
-                        <rect key="frame" x="326" y="27" width="68" height="37"/>
+                        <rect key="frame" x="321" y="25" width="80" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Follow"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <state key="normal" title="Follow">
+                            <color key="titleColor" red="0.45098039215686275" green="0.52156862745098043" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
                         <connections>
-                            <action selector="followButton" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dBW-1U-VAz"/>
+                            <action selector="follow" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GwB-eD-A6S"/>
                         </connections>
                     </button>
                 </subviews>
@@ -53,6 +56,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="detailLabel" destination="qSX-Ak-opr" id="CLI-uW-b3b"/>
+                <outlet property="followButton" destination="XY9-AB-cHI" id="mwK-uK-T7y"/>
                 <outlet property="userImageView" destination="7VO-JB-OX8" id="snp-2C-3Ve"/>
                 <outlet property="userNameLabel" destination="z0c-z3-shm" id="pSM-Oa-Pyl"/>
             </connections>

@@ -23,7 +23,6 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         backButton()
         makeProfileButton()
         
@@ -32,11 +31,14 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //カスタムセルの登録
         followTableView.register(UINib(nibName: "FollowCustomTableViewCell", bundle: nil), forCellReuseIdentifier: "FollowCustomTableViewCell")
+        
+        loadUsers()
+        followTableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadUsers()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -44,7 +46,7 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return self.users.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -55,8 +57,15 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FollowCustomTableViewCell") as? FollowCustomTableViewCell {
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.height / 2
             cell.userImageView.layer.masksToBounds = true
-            cell.userNameLabel.text = self.users[indexPath.row].userName
-            cell.detailLabel.text = self.users[indexPath.row].text
+            let rgba = UIColor(red: 115/255, green: 133/255, blue: 169/255, alpha: 1.0)
+            cell.followButton.layer.borderWidth = 3.0
+            cell.followButton.layer.borderColor = rgba.cgColor
+            cell.followButton.layer.cornerRadius = 20
+            
+            if self.users.count != 0 {
+                cell.userNameLabel.text = self.users[indexPath.row].userName
+                cell.detailLabel.text = self.users[indexPath.row].text
+            }
             return cell
         }
         
@@ -64,7 +73,7 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        followTableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -113,6 +122,7 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if error != nil {
                 print("何らかの理由で読み取りできませんでした。")
             } else {
+                print("follow画面読み取りはできました")
                 for val in querySnapshot!.documents {
                     let userName = val.get("userName") as! String
                     let email = val.get("email") as! String
@@ -122,6 +132,8 @@ class FollowViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let text = val.get("text") as! String
                     let userArray = User(userName: userName, email: email, image: image, visitedNumber: visitedNumber, favoriteNumber: favoriteNumber, text: text)
                     self.users.append(userArray)
+                    print(self.users.count)
+                    self.followTableView.reloadData()
                     
                 }
                 print("ユーザ一覧取得完了")

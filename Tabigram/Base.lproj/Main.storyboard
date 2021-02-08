@@ -358,7 +358,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.92941176469999998" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowCell" rowHeight="92" id="605-jb-SjG">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowCustomTableViewCell" rowHeight="92" id="605-jb-SjG">
                                         <rect key="frame" x="0.0" y="28" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="605-jb-SjG" id="acn-OY-c8i">
@@ -388,7 +388,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="s1e-Zc-G6Q"/>
                     <connections>
-                        <outlet property="followTableView" destination="Rvr-7s-1G4" id="MQu-dA-5tM"/>
+                        <outlet property="followTableView" destination="Rvr-7s-1G4" id="B87-RQ-ENK"/>
                         <segue destination="sc6-oU-DRJ" kind="presentation" identifier="Profile" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="8Pf-ga-ECB"/>
                     </connections>
                 </viewController>
